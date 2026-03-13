@@ -90,10 +90,10 @@ Plans:
   2. Pool is randomized on client; order fixed for session duration
   3. Pool has minimum 5 recipes; fewer triggers empty state (handled in Phase 9)
   4. Pool stored in Zustand survives page refresh within same session
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 05-01: TBD
+- [ ] 05-01-PLAN.md — Recipe pool fetch, diet filter, shuffle, persist; loading/error/empty states
 
 ### Phase 6: Discovery Loop
 **Goal**: User swipes through full-screen recipe cards one at a time; tap opens detail
@@ -166,7 +166,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 2. Data Layer | 2/2 | Complete   | 2026-03-13 |
 | 3. Onboarding | 2/2 | Complete   | 2026-03-13 |
 | 4. Session Setup | 0/1 | Planned | - |
-| 5. Recipe Pool | 0/TBD | Not started | - |
+| 5. Recipe Pool | 0/1 | Planned | - |
 | 6. Discovery Loop | 0/TBD | Not started | - |
 | 7. Recipe Detail + Signal Logging | 0/TBD | Not started | - |
 | 8. Session Management + Success Inference | 0/TBD | Not started | - |
