@@ -6,6 +6,7 @@ import { shuffleArray } from '@/stores/session-store'
 import { fetchRecipes } from '@/lib/supabase/recipes'
 import OnboardingFlow from '@/components/onboarding/OnboardingFlow'
 import GreetingSplash from '@/components/session/GreetingSplash'
+import { DiscoveryCardStack } from '@/components/discovery/DiscoveryCardStack'
 import { AnimatePresence, motion } from 'motion/react'
 
 export default function Home() {
@@ -67,14 +68,9 @@ export default function Home() {
               No recipes match your filters.
             </p>
           ) : (
-            <>
-              <h1 className="font-heading text-charcoal text-4xl font-extrabold tracking-[-0.04em] leading-[0.85] uppercase text-center">
-                Aaj Kya Khana Hai?
-              </h1>
-              <p className="font-sans text-charcoal/80 text-lg mt-4 text-center normal-case">
-                Recipes loading soon...
-              </p>
-            </>
+            <div className="relative h-[min(100dvh,800px)] w-full max-w-md overflow-hidden rounded-[var(--radius-default)] border-2 border-charcoal">
+              <DiscoveryCardStack />
+            </div>
           )}
         </motion.main>
       )}
