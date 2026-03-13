@@ -71,7 +71,7 @@ const initialSession: Session = {
 
 // ─── Fisher-Yates Shuffle ───
 
-function shuffleArray<T>(arr: T[]): T[] {
+export function shuffleArray<T>(arr: T[]): T[] {
   const shuffled = [...arr]
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
@@ -112,16 +112,16 @@ export const useSessionStore = create<
         })),
 
       startSession: (cuisines, ingredientFilter) =>
-        set({
+        set((s) => ({
           session: {
             cuisines,
             ingredientFilter,
-            pool: [],
+            pool: s.session.pool,
             currentIndex: 0,
             lastActiveAt: Date.now(),
             setupComplete: true,
           },
-        }),
+        })),
 
       setPool: (recipes) =>
         set((s) => ({
