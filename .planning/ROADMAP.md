@@ -68,18 +68,18 @@ Plans:
 - [x] 03-02-PLAN.md — Cuisine blocklist screen with rotated chip cloud, wire into flow, complete onboarding
 
 ### Phase 4: Session Setup
-**Goal**: User picks 1-3 cuisines and optional ingredient for this session; session starts immediately
+**Goal**: Time-based greeting splash auto-starts session; same-session return resumes position
 **Depends on**: Phase 3
-**Requirements**: SESS-01, SESS-02, SESS-03, SESS-04
+**Requirements**: SESS-04 (SESS-01, SESS-02, SESS-03 deferred to Phase 6 filter bar)
 **Success Criteria** (what must be TRUE):
-  1. User selects 1-3 cuisines from grid (excluding blocklist); selection is mandatory
-  2. User can optionally select one ingredient filter or skip
-  3. Session starts immediately after setup completes
-  4. Session cuisine screen matches design mockup (stitch_screens/4_session_start.html)
-**Plans**: TBD
+  1. New session: user sees time-based greeting for ~2 seconds, then auto-transitions to discovery
+  2. Same-session return: user skips greeting, resumes at current card position
+  3. Session auto-starts with all cuisines, no ingredient filter
+  4. Greeting text varies by time of day (morning/afternoon/evening/night)
+**Plans:** 1/1 plans defined
 
 Plans:
-- [ ] 04-01: TBD
+- [ ] 04-01-PLAN.md — Greeting splash with 2-sec auto-dismiss, page.tsx flow (greeting vs resume)
 
 ### Phase 5: Recipe Pool
 **Goal**: Filtered, randomized pool of recipes ready for discovery; survives refresh
@@ -165,7 +165,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 1. Foundation | 2/2 | Complete    | 2026-03-13 |
 | 2. Data Layer | 2/2 | Complete   | 2026-03-13 |
 | 3. Onboarding | 2/2 | Complete   | 2026-03-13 |
-| 4. Session Setup | 0/TBD | Not started | - |
+| 4. Session Setup | 0/1 | Planned | - |
 | 5. Recipe Pool | 0/TBD | Not started | - |
 | 6. Discovery Loop | 0/TBD | Not started | - |
 | 7. Recipe Detail + Signal Logging | 0/TBD | Not started | - |

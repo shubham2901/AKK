@@ -31,10 +31,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Session Setup
 
-- [ ] **SESS-01**: User selects 1-3 cuisines for this session (mandatory, excludes blocklist)
-- [ ] **SESS-02**: User can optionally select one ingredient filter (single-select, visible skip)
-- [ ] **SESS-03**: Session cuisine screen shows grid cards per design mockup
-- [ ] **SESS-04**: Session starts immediately after setup completes
+- [ ] **SESS-01**: ~~User selects 1-3 cuisines for this session~~ → Deferred to Phase 6 (discovery filter bar)
+- [ ] **SESS-02**: ~~User can optionally select one ingredient filter~~ → Deferred to Phase 6 (discovery filter bar)
+- [ ] **SESS-03**: ~~Session cuisine screen shows grid cards~~ → Eliminated (no session setup screen)
+- [x] **SESS-04**: Session starts immediately (auto-start after 2-sec greeting)
 
 ### Recipe Pool
 
@@ -150,10 +150,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | ONBR-03 | Phase 3 | Complete |
 | ONBR-04 | Phase 3 | Complete |
 | ONBR-05 | Phase 3 | Complete |
-| SESS-01 | Phase 4 | Pending |
-| SESS-02 | Phase 4 | Pending |
-| SESS-03 | Phase 4 | Pending |
-| SESS-04 | Phase 4 | Pending |
+| SESS-01 | Phase 6 | Deferred |
+| SESS-02 | Phase 6 | Deferred |
+| SESS-03 | — | Eliminated |
+| SESS-04 | Phase 4 | Complete |
 | POOL-01 | Phase 5 | Pending |
 | POOL-02 | Phase 5 | Pending |
 | POOL-03 | Phase 5 | Pending |
