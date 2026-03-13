@@ -31,10 +31,11 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
   2. Syne (headings) and Plus Jakarta Sans (body) load without FOUC via next/font
   3. Design tokens (Burnt Orange, Charcoal, hard borders) visible in UI
   4. Layout is mobile-first with max-w-md container; touch targets are min 44px
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Bootstrap Next.js app + root layout (fonts, anti-flash, theme-color)
+- [ ] 01-02-PLAN.md — Design tokens + branded placeholder page
 
 ### Phase 2: Data Layer
 **Goal**: Supabase and Zustand infrastructure ready for all data consumers
@@ -159,7 +160,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/TBD | Not started | - |
+| 1. Foundation | 0/2 | Not started | - |
 | 2. Data Layer | 0/TBD | Not started | - |
 | 3. Onboarding | 0/TBD | Not started | - |
 | 4. Session Setup | 0/TBD | Not started | - |
