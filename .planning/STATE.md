@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-03-13)
 ## Current Position
 
 Phase: 7 of 9 (Recipe Detail + Signal Logging)
-Plan: 1 of 3 in current phase
-Status: In Progress — 07-01 complete
-Last activity: 2026-03-13 — Completed 07-01-PLAN.md
+Plan: 2 of 3 in current phase
+Status: In Progress — 07-02 complete
+Last activity: 2026-03-13 — Completed 07-02-PLAN.md
 
 Progress: [█████████░] 91%
 
@@ -41,6 +41,7 @@ Progress: [█████████░] 91%
 | Phase 06-discovery-loop P02 | 5min | 2 tasks | 3 files |
 | Phase 06-discovery-loop P03 | 1min | 2 tasks | 2 files |
 | Phase 07-recipe-detail-signal-logging P01 | 5 | 2 tasks | 2 files |
+| Phase 07-recipe-detail-signal-logging P02 | 5 | 1 task | 1 file |
 
 ## Accumulated Context
 
@@ -65,6 +66,7 @@ Recent decisions affecting current work:
 - [Phase 06-discovery-loop]: Ingredient filter deferred per CONTEXT; cuisine + meal type only for filter bar foundation
 - [Phase 07-01]: pickedIds persisted; viewedIds session-only per CONTEXT
 - [Phase 07-01]: Session type unchanged; pickedIds/viewedIds at store root
+- [Phase 07-02]: Drag handle only for swipe-down (avoids scroll conflict)
 
 ### Pending Todos
 
@@ -77,5 +79,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Completed 07-01-PLAN.md
-Resume file: .planning/phases/07-recipe-detail-signal-logging/07-02-PLAN.md
+Stopped at: Completed 07-02-PLAN.md
+Resume file: .planning/phases/07-recipe-detail-signal-logging/07-03-PLAN.md
