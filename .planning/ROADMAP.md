@@ -17,7 +17,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 - [x] **Phase 5: Recipe Pool** - Fetch, filter, randomize; min 5 recipes, survives refresh (completed 2026-03-13)
 - [x] **Phase 6: Discovery Loop** - Full-screen cards, swipe navigation, filter bar, shuffle (completed 2026-03-13)
 - [x] **Phase 7: Recipe Detail + Signal Logging** - Overlay, YouTube/web links, Found my pick, fire-and-forget logging (completed 2026-03-13)
-- [ ] **Phase 8: Session Management + Success Inference** - Anonymous sessions, 4hr timeout, success inference
+- [x] **Phase 8: Session Management + Success Inference** - Anonymous sessions, 4hr timeout, success inference (completed 2026-03-13)
 - [ ] **Phase 9: Polish** - Empty state, settings page, reset/shuffle
 
 ## Phase Details
@@ -140,11 +140,11 @@ Plans:
   2. Card position, pool order, and filters survive page refresh within session
   3. New session created after 4 hours of inactivity (based on last_active_at)
   4. When user opens YouTube link, timestamp recorded; on next open, if >2 hours since youtube_open, session_success_inferred logged
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 08-01-PLAN.md — Session lifecycle infrastructure (eager sessionId, rotateSession, syncSession service)
-- [ ] 08-02-PLAN.md — Lifecycle hook + YouTube tracking + integration
+- [x] 08-02-PLAN.md — Lifecycle hook + YouTube tracking + integration
 
 ### Phase 9: Polish
 **Goal**: Empty state when pool < 5; settings to edit diet and blocklist
@@ -174,5 +174,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 5. Recipe Pool | 1/1 | Complete    | 2026-03-13 |
 | 6. Discovery Loop | 3/3 | Complete   | 2026-03-13 |
 | 7. Recipe Detail + Signal Logging | 3/3 | Complete | 2026-03-13 |
-| 8. Session Management + Success Inference | 1/2 | In Progress|  |
+| 8. Session Management + Success Inference | 2/2 | Complete   | 2026-03-13 |
 | 9. Polish | 0/TBD | Not started | - |

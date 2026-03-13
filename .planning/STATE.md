@@ -10,9 +10,9 @@ See: .planning/PROJECT.md (updated 2026-03-13)
 ## Current Position
 
 Phase: 8 of 9 (Session Management + Success Inference)
-Plan: 1 of 2 in current phase
-Status: In progress — 08-01 complete, 08-02 next
-Last activity: 2026-03-13 — Completed 08-01-PLAN.md
+Plan: 2 of 2 in current phase
+Status: Complete — Phase 8 done
+Last activity: 2026-03-13 — Completed 08-02-PLAN.md
 
 Progress: [██████████] 100%
 
@@ -44,6 +44,7 @@ Progress: [██████████] 100%
 | Phase 07-recipe-detail-signal-logging P02 | 5 | 1 task | 1 file |
 | Phase 07-recipe-detail-signal-logging P03 | 5 | 3 tasks | 4 files |
 | Phase 08-session-management-success-inference P01 | 5 | 3 tasks | 2 files |
+| Phase 08-session-management-success-inference P02 | 5 | 3 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -71,6 +72,8 @@ Recent decisions affecting current work:
 - [Phase 07-02]: Drag handle only for swipe-down (avoids scroll conflict)
 - [Phase 08-session-management-success-inference]: Eager sessionId in onRehydrateStorage; sync deferred to Plan 08-02 useSessionLifecycle
 - [Phase 08-session-management-success-inference]: rotateSession preserves pool (reshuffled), filters, pickedIds; clears viewedIds
+- [Phase 08-02]: Initial session sync via useState(synced) in page.tsx after hydration
+- [Phase 08-02]: Success inference: >2hr since youtube_open → log session_success_inferred, clear record
 
 ### Pending Todos
 
@@ -83,5 +86,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Completed 07-03-PLAN.md
-Resume file: .planning/phases/08-session-management-success-inference/08-02-PLAN.md
+Stopped at: Completed 08-02-PLAN.md
+Resume file: .planning/phases/09-polish (next phase)
