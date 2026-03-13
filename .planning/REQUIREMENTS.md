@@ -145,51 +145,51 @@ Deferred to future release. Tracked but not in current roadmap.
 | DATA-02 | Phase 2 | Pending |
 | DATA-03 | Phase 2 | Pending |
 | DATA-04 | Phase 2 | Pending |
-| ONBR-01 | Phase 6 | Pending |
-| ONBR-02 | Phase 6 | Pending |
-| ONBR-03 | Phase 6 | Pending |
-| ONBR-04 | Phase 6 | Pending |
-| ONBR-05 | Phase 6 | Pending |
-| SESS-01 | Phase 6 | Pending |
-| SESS-02 | Phase 6 | Pending |
-| SESS-03 | Phase 6 | Pending |
-| SESS-04 | Phase 6 | Pending |
-| POOL-01 | Phase 3 | Pending |
-| POOL-02 | Phase 3 | Pending |
-| POOL-03 | Phase 3 | Pending |
-| POOL-04 | Phase 3 | Pending |
-| DISC-01 | Phase 4 | Pending |
-| DISC-02 | Phase 4 | Pending |
-| DISC-03 | Phase 4 | Pending |
-| DISC-04 | Phase 4 | Pending |
-| DISC-05 | Phase 4 | Pending |
-| DISC-06 | Phase 4 | Pending |
-| DISC-07 | Phase 4 | Pending |
-| DETL-01 | Phase 5 | Pending |
-| DETL-02 | Phase 5 | Pending |
-| DETL-03 | Phase 5 | Pending |
-| DETL-04 | Phase 5 | Pending |
-| DETL-05 | Phase 5 | Pending |
-| DETL-06 | Phase 5 | Pending |
-| DETL-07 | Phase 5 | Pending |
-| LOGG-01 | Phase 5 | Pending |
-| LOGG-02 | Phase 5 | Pending |
-| LOGG-03 | Phase 5 | Pending |
-| LOGG-04 | Phase 5 | Pending |
-| SMGM-01 | Phase 7 | Pending |
-| SMGM-02 | Phase 7 | Pending |
-| SMGM-03 | Phase 7 | Pending |
-| SMGM-04 | Phase 7 | Pending |
-| SINF-01 | Phase 7 | Pending |
-| SINF-02 | Phase 7 | Pending |
-| SETT-01 | Phase 7 | Pending |
-| SETT-02 | Phase 7 | Pending |
-| SETT-03 | Phase 7 | Pending |
-| SETT-04 | Phase 7 | Pending |
-| EMPT-01 | Phase 7 | Pending |
-| EMPT-02 | Phase 7 | Pending |
-| EMPT-03 | Phase 7 | Pending |
-| EMPT-04 | Phase 7 | Pending |
+| ONBR-01 | Phase 3 | Pending |
+| ONBR-02 | Phase 3 | Pending |
+| ONBR-03 | Phase 3 | Pending |
+| ONBR-04 | Phase 3 | Pending |
+| ONBR-05 | Phase 3 | Pending |
+| SESS-01 | Phase 4 | Pending |
+| SESS-02 | Phase 4 | Pending |
+| SESS-03 | Phase 4 | Pending |
+| SESS-04 | Phase 4 | Pending |
+| POOL-01 | Phase 5 | Pending |
+| POOL-02 | Phase 5 | Pending |
+| POOL-03 | Phase 5 | Pending |
+| POOL-04 | Phase 5 | Pending |
+| DISC-01 | Phase 6 | Pending |
+| DISC-02 | Phase 6 | Pending |
+| DISC-03 | Phase 6 | Pending |
+| DISC-04 | Phase 6 | Pending |
+| DISC-05 | Phase 6 | Pending |
+| DISC-06 | Phase 6 | Pending |
+| DISC-07 | Phase 6 | Pending |
+| DETL-01 | Phase 7 | Pending |
+| DETL-02 | Phase 7 | Pending |
+| DETL-03 | Phase 7 | Pending |
+| DETL-04 | Phase 7 | Pending |
+| DETL-05 | Phase 7 | Pending |
+| DETL-06 | Phase 7 | Pending |
+| DETL-07 | Phase 7 | Pending |
+| LOGG-01 | Phase 7 | Pending |
+| LOGG-02 | Phase 7 | Pending |
+| LOGG-03 | Phase 7 | Pending |
+| LOGG-04 | Phase 7 | Pending |
+| SMGM-01 | Phase 8 | Pending |
+| SMGM-02 | Phase 8 | Pending |
+| SMGM-03 | Phase 8 | Pending |
+| SMGM-04 | Phase 8 | Pending |
+| SINF-01 | Phase 8 | Pending |
+| SINF-02 | Phase 8 | Pending |
+| SETT-01 | Phase 9 | Pending |
+| SETT-02 | Phase 9 | Pending |
+| SETT-03 | Phase 9 | Pending |
+| SETT-04 | Phase 9 | Pending |
+| EMPT-01 | Phase 9 | Pending |
+| EMPT-02 | Phase 9 | Pending |
+| EMPT-03 | Phase 9 | Pending |
+| EMPT-04 | Phase 9 | Pending |
 
 **Coverage:**
 - v1 requirements: 49 total
@@ -198,4 +198,4 @@ Deferred to future release. Tracked but not in current roadmap.
 
 ---
 *Requirements defined: 2026-03-11*
-*Last updated: 2026-03-11 after initial definition*
+*Last updated: 2026-03-13 after roadmap creation*
