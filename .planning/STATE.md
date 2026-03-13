@@ -10,16 +10,16 @@ See: .planning/PROJECT.md (updated 2026-03-13)
 ## Current Position
 
 Phase: 3 of 9 (Onboarding)
-Plan: 1 of 2 in current phase
-Status: In progress — 03-01 complete
-Last activity: 2026-03-13 — Completed Phase 3 discuss + planning
+Plan: 2 of 2 in current phase
+Status: Complete — 03-02 complete
+Last activity: 2026-03-13 — Completed 03-02-PLAN.md
 
-Progress: [████░░░░░░] 40%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 4
+- Total plans completed: 5
 - Average duration: 3.9min
 - Total execution time: 16min
 
@@ -31,8 +31,10 @@ Progress: [████░░░░░░] 40%
 | 02-data-layer | 2 | 7min | 3.5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (8min), 01-02 (1min), 02-01 (4min), 02-02 (3min)
+- Last 5 plans: 01-01 (8min), 01-02 (1min), 02-01 (4min), 02-02 (3min), 03-02 (6min)
 - Trend: Improving
+
+| Phase 03-onboarding P02 | 6 | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -51,6 +53,7 @@ Recent decisions affecting current work:
 - Keep Sour Gummy heading font; font defined in one CSS variable for easy swap
 - Hardcoded curated cuisine list (~15), niche regionals grouped under broader labels
 - Mockups are reference for vibe, not pixel-spec
+- [Phase 03-onboarding]: Skip saves empty blocklist (not null) — intentional so we know user made a choice
 
 ### Pending Todos
 
@@ -63,5 +66,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Completed 03-01-PLAN.md
+Stopped at: Completed 03-02-PLAN.md
 Resume file: None

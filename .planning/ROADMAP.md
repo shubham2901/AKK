@@ -12,7 +12,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 
 - [x] **Phase 1: Foundation** - App shell, fonts, design tokens, mobile-first layout (completed 2026-03-13)
 - [x] **Phase 2: Data Layer** - Supabase client, types, Zustand store with persist (completed 2026-03-13)
-- [ ] **Phase 3: Onboarding** - Diet preference and cuisine blocklist (first launch only)
+- [x] **Phase 3: Onboarding** - Diet preference and cuisine blocklist (first launch only) (completed 2026-03-13)
 - [ ] **Phase 4: Session Setup** - Cuisine pick and optional ingredient filter per session
 - [ ] **Phase 5: Recipe Pool** - Fetch, filter, randomize; min 5 recipes, survives refresh
 - [ ] **Phase 6: Discovery Loop** - Full-screen cards, swipe navigation, filter bar, shuffle
@@ -61,11 +61,11 @@ Plans:
   2. User sees cuisine blocklist (asymmetric tag cloud with rotated chips) after diet
   3. Selections save to localStorage; onboarding flow never shown again on subsequent opens
   4. Diet and blocklist screens match design vibe (neo-brutalist, not pixel-match)
-**Plans:** 1/2 plans complete
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 03-01-PLAN.md — Install motion, Material Symbols font, diet preference screen, onboarding gate in page.tsx
-- [ ] 03-02-PLAN.md — Cuisine blocklist screen with rotated chip cloud, wire into flow, complete onboarding
+- [x] 03-02-PLAN.md — Cuisine blocklist screen with rotated chip cloud, wire into flow, complete onboarding
 
 ### Phase 4: Session Setup
 **Goal**: User picks 1-3 cuisines and optional ingredient for this session; session starts immediately
@@ -164,7 +164,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-13 |
 | 2. Data Layer | 2/2 | Complete   | 2026-03-13 |
-| 3. Onboarding | 0/2 | Planned | - |
+| 3. Onboarding | 2/2 | Complete   | 2026-03-13 |
 | 4. Session Setup | 0/TBD | Not started | - |
 | 5. Recipe Pool | 0/TBD | Not started | - |
 | 6. Discovery Loop | 0/TBD | Not started | - |
