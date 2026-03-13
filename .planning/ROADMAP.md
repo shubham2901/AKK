@@ -46,10 +46,11 @@ Plans:
   2. TypeScript interfaces exist for Recipe, UserSession, UserInteraction, SessionState
   3. Zustand store holds session state (preferences, pool, card index, filters)
   4. Store state persists to localStorage across page refresh
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — Supabase client, types, interaction logger
+- [ ] 02-02-PLAN.md — Zustand store with persist
 
 ### Phase 3: Onboarding
 **Goal**: First-time user sets diet and blocklist; onboarding never shown again
