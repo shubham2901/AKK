@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import DietStep from './DietStep'
+import BlocklistStep from './BlocklistStep'
 
 export default function OnboardingFlow() {
   const [step, setStep] = useState(0)
@@ -27,9 +28,9 @@ export default function OnboardingFlow() {
           animate={{ x: 0, opacity: 1 }}
           exit={{ x: -300, opacity: 0 }}
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-          className="min-h-screen flex flex-col items-center justify-center p-6 max-w-md mx-auto border-x-2 border-charcoal"
+          className="border-x-2 border-charcoal"
         >
-          <p className="font-sans text-charcoal text-lg">Blocklist step coming in 03-02</p>
+          <BlocklistStep onComplete={() => {}} onBack={() => setStep(0)} />
         </motion.div>
       )}
     </AnimatePresence>
