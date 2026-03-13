@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
-**Current focus:** Phase 4 — Session Setup (Complete)
+**Current focus:** Phase 5 — Recipe Pool (Complete)
 
 ## Current Position
 
-Phase: 4 of 9 (Session Setup)
+Phase: 5 of 9 (Recipe Pool)
 Plan: 1 of 1 in current phase
-Status: Complete — 04-01 complete
-Last activity: 2026-03-13 — Completed 04-01-PLAN.md
+Status: Complete — 05-01 complete
+Last activity: 2026-03-13 — Completed 05-01-PLAN.md
 
-Progress: [███████░░░] 70%
+Progress: [████████░░] 78%
 
 ## Performance Metrics
 
@@ -36,6 +36,7 @@ Progress: [███████░░░] 70%
 
 | Phase 03-onboarding P02 | 6 | 3 tasks | 2 files |
 | Phase 04-session-setup P01 | 1min | 3 tasks | 2 files |
+| Phase 05-recipe-pool P01 | 2min | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -55,6 +56,8 @@ Recent decisions affecting current work:
 - Hardcoded curated cuisine list (~15), niche regionals grouped under broader labels
 - Mockups are reference for vibe, not pixel-spec
 - [Phase 03-onboarding]: Skip saves empty blocklist (not null) — intentional so we know user made a choice
+- [Phase 05-recipe-pool]: Diet filter only in V0; blocklist/cuisine/ingredient deferred to Phase 6
+- [Phase 05-recipe-pool]: startSession preserves pool to avoid race when fetch completes before greeting ends
 
 ### Pending Todos
 
@@ -67,5 +70,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Completed 04-01-PLAN.md
+Stopped at: Completed 05-01-PLAN.md
 Resume file: None

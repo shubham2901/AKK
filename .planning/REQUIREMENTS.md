@@ -38,10 +38,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Recipe Pool
 
-- [ ] **POOL-01**: Recipe pool fetched from Supabase with server-side filters (diet, blocklist, cuisine, ingredient)
-- [ ] **POOL-02**: Pool randomized on client and order fixed for session duration
-- [ ] **POOL-03**: Minimum pool size of 5 recipes; empty state shown if fewer
-- [ ] **POOL-04**: Pool stored in Zustand and survives page refresh within session
+- [x] **POOL-01**: Recipe pool fetched from Supabase with server-side filters (diet, blocklist, cuisine, ingredient)
+- [x] **POOL-02**: Pool randomized on client and order fixed for session duration
+- [x] **POOL-03**: Minimum pool size of 5 recipes; empty state shown if fewer
+- [x] **POOL-04**: Pool stored in Zustand and survives page refresh within session
 
 ### Discovery Loop
 
@@ -154,10 +154,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | SESS-02 | Phase 6 | Deferred |
 | SESS-03 | — | Eliminated |
 | SESS-04 | Phase 4 | Complete |
-| POOL-01 | Phase 5 | Pending |
-| POOL-02 | Phase 5 | Pending |
-| POOL-03 | Phase 5 | Pending |
-| POOL-04 | Phase 5 | Pending |
+| POOL-01 | Phase 5 | Complete |
+| POOL-02 | Phase 5 | Complete |
+| POOL-03 | Phase 5 | Complete |
+| POOL-04 | Phase 5 | Complete |
 | DISC-01 | Phase 6 | Pending |
 | DISC-02 | Phase 6 | Pending |
 | DISC-03 | Phase 6 | Pending |

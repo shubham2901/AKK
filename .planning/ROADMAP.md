@@ -14,7 +14,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 - [x] **Phase 2: Data Layer** - Supabase client, types, Zustand store with persist (completed 2026-03-13)
 - [x] **Phase 3: Onboarding** - Diet preference and cuisine blocklist (first launch only) (completed 2026-03-13)
 - [ ] **Phase 4: Session Setup** - Cuisine pick and optional ingredient filter per session
-- [ ] **Phase 5: Recipe Pool** - Fetch, filter, randomize; min 5 recipes, survives refresh
+- [x] **Phase 5: Recipe Pool** - Fetch, filter, randomize; min 5 recipes, survives refresh (completed 2026-03-13)
 - [ ] **Phase 6: Discovery Loop** - Full-screen cards, swipe navigation, filter bar, shuffle
 - [ ] **Phase 7: Recipe Detail + Signal Logging** - Overlay, YouTube/web links, Found my pick, fire-and-forget logging
 - [ ] **Phase 8: Session Management + Success Inference** - Anonymous sessions, 4hr timeout, success inference
@@ -93,7 +93,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 05-01-PLAN.md — Recipe pool fetch, diet filter, shuffle, persist; loading/error/empty states
+- [x] 05-01-PLAN.md — Recipe pool fetch, diet filter, shuffle, persist; loading/error/empty states
 
 ### Phase 6: Discovery Loop
 **Goal**: User swipes through full-screen recipe cards one at a time; tap opens detail
@@ -166,7 +166,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 2. Data Layer | 2/2 | Complete   | 2026-03-13 |
 | 3. Onboarding | 2/2 | Complete   | 2026-03-13 |
 | 4. Session Setup | 0/1 | Planned | - |
-| 5. Recipe Pool | 0/1 | Planned | - |
+| 5. Recipe Pool | 1/1 | Complete | 2026-03-13 |
 | 6. Discovery Loop | 0/TBD | Not started | - |
 | 7. Recipe Detail + Signal Logging | 0/TBD | Not started | - |
 | 8. Session Management + Success Inference | 0/TBD | Not started | - |
