@@ -106,10 +106,12 @@ Plans:
   4. Shuffle button (top right) re-randomizes pool and resets position to 0
   5. Filter bar at bottom opens bottom sheets for cuisine / meal type / ingredient
   6. Card layout matches immersive design mockup (stitch_screens/3_recipe_card_immersive.html)
-**Plans**: TBD
+**Plans:** 3 plans
 
 Plans:
-- [ ] 06-01: TBD
+- [ ] 06-01-PLAN.md — Store loop + filter state, FilterBottomSheet
+- [ ] 06-02-PLAN.md — DiscoveryCard + DiscoveryCardStack (swipe, spring)
+- [ ] 06-03-PLAN.md — FilterBar + page integration, tap-to-detail
 
 ### Phase 7: Recipe Detail + Signal Logging
 **Goal**: User views recipe details, uses YouTube/web links, logs "Found my pick"; all interactions logged
