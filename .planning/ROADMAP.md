@@ -34,7 +34,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Bootstrap Next.js app + root layout (fonts, anti-flash, theme-color)
+- [x] 01-01-PLAN.md — Bootstrap Next.js app + root layout (fonts, anti-flash, theme-color)
 - [ ] 01-02-PLAN.md — Design tokens + branded placeholder page
 
 ### Phase 2: Data Layer
@@ -160,7 +160,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Not started | - |
+| 1. Foundation | 1/2 | In Progress | - |
 | 2. Data Layer | 0/TBD | Not started | - |
 | 3. Onboarding | 0/TBD | Not started | - |
 | 4. Session Setup | 0/TBD | Not started | - |
