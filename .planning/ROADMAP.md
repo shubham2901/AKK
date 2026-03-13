@@ -10,7 +10,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Foundation** - App shell, fonts, design tokens, mobile-first layout
+- [x] **Phase 1: Foundation** - App shell, fonts, design tokens, mobile-first layout (completed 2026-03-13)
 - [ ] **Phase 2: Data Layer** - Supabase client, types, Zustand store with persist
 - [ ] **Phase 3: Onboarding** - Diet preference and cuisine blocklist (first launch only)
 - [ ] **Phase 4: Session Setup** - Cuisine pick and optional ingredient filter per session
@@ -31,11 +31,11 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
   2. Syne (headings) and Plus Jakarta Sans (body) load without FOUC via next/font
   3. Design tokens (Burnt Orange, Charcoal, hard borders) visible in UI
   4. Layout is mobile-first with max-w-md container; touch targets are min 44px
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 01-01-PLAN.md — Bootstrap Next.js app + root layout (fonts, anti-flash, theme-color)
-- [ ] 01-02-PLAN.md — Design tokens + branded placeholder page
+- [x] 01-02-PLAN.md — Design tokens + branded placeholder page
 
 ### Phase 2: Data Layer
 **Goal**: Supabase and Zustand infrastructure ready for all data consumers
@@ -160,7 +160,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 1/2 | In Progress | - |
+| 1. Foundation | 2/2 | Complete   | 2026-03-13 |
 | 2. Data Layer | 0/TBD | Not started | - |
 | 3. Onboarding | 0/TBD | Not started | - |
 | 4. Session Setup | 0/TBD | Not started | - |
