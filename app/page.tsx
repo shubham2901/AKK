@@ -1,6 +1,9 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useSessionStore } from '@/stores/session-store'
+import { shuffleArray } from '@/stores/session-store'
+import { fetchRecipes } from '@/lib/supabase/recipes'
 import OnboardingFlow from '@/components/onboarding/OnboardingFlow'
 import GreetingSplash from '@/components/session/GreetingSplash'
 import { AnimatePresence, motion } from 'motion/react'
@@ -9,6 +12,27 @@ export default function Home() {
   const hasHydrated = useSessionStore((s) => s._hasHydrated)
   const onboardingComplete = useSessionStore((s) => s.preferences.onboardingComplete)
   const setupComplete = useSessionStore((s) => s.session.setupComplete)
+  const pool = useSessionStore((s) => s.session.pool)
+  const preferences = useSessionStore((s) => s.preferences)
+
+  const [fetchDone, setFetchDone] = useState(false)
+  const [fetchError, setFetchError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!setupComplete && pool.length === 0) {
+      fetchRecipes(preferences.diet)
+        .then((recipes) => {
+          const shuffled = shuffleArray(recipes)
+          useSessionStore.getState().setPool(shuffled)
+        })
+        .catch(() => {
+          setFetchError('Sorry, something went wrong.')
+        })
+        .finally(() => {
+          setFetchDone(true)
+        })
+    }
+  }, [setupComplete, pool.length, preferences.diet])
 
   if (!hasHydrated) return null
   if (!onboardingComplete) return <OnboardingFlow />
@@ -29,13 +53,29 @@ export default function Home() {
           transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           className="min-h-screen flex flex-col items-center justify-center p-6 max-w-md mx-auto border-x-2 border-charcoal"
         >
-          {/* Discovery placeholder — replaced in Phase 5/6 */}
-          <h1 className="font-heading text-charcoal text-4xl font-extrabold tracking-[-0.04em] leading-[0.85] uppercase text-center">
-            Aaj Kya Khana Hai?
-          </h1>
-          <p className="font-sans text-charcoal/80 text-lg mt-4 text-center normal-case">
-            Recipes loading soon...
-          </p>
+          {fetchError ? (
+            <p className="font-sans text-charcoal/80 text-lg text-center">{fetchError}</p>
+          ) : !fetchDone && pool.length === 0 ? (
+            <>
+              <div className="w-full max-w-sm h-48 rounded-xl bg-charcoal/10 animate-pulse mb-4" />
+              <div className="w-full max-w-sm h-48 rounded-xl bg-charcoal/10 animate-pulse mb-4" />
+              <div className="w-full max-w-sm h-48 rounded-xl bg-charcoal/10 animate-pulse" />
+              <p className="font-sans text-charcoal/60 text-sm mt-4">Loading recipes...</p>
+            </>
+          ) : pool.length < 5 ? (
+            <p className="font-sans text-charcoal/80 text-lg text-center">
+              No recipes match your filters.
+            </p>
+          ) : (
+            <>
+              <h1 className="font-heading text-charcoal text-4xl font-extrabold tracking-[-0.04em] leading-[0.85] uppercase text-center">
+                Aaj Kya Khana Hai?
+              </h1>
+              <p className="font-sans text-charcoal/80 text-lg mt-4 text-center normal-case">
+                Recipes loading soon...
+              </p>
+            </>
+          )}
         </motion.main>
       )}
     </AnimatePresence>
