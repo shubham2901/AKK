@@ -106,7 +106,7 @@ Plans:
   4. Shuffle button (top right) re-randomizes pool and resets position to 0
   5. Filter bar at bottom opens bottom sheets for cuisine / meal type / ingredient
   6. Card layout matches immersive design mockup (stitch_screens/3_recipe_card_immersive.html)
-**Plans:** 3 plans
+**Plans:** 2/3 plans executed
 
 Plans:
 - [ ] 06-01-PLAN.md — Store loop + filter state, FilterBottomSheet
@@ -169,7 +169,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 3. Onboarding | 2/2 | Complete   | 2026-03-13 |
 | 4. Session Setup | 0/1 | Planned | - |
 | 5. Recipe Pool | 1/1 | Complete    | 2026-03-13 |
-| 6. Discovery Loop | 0/TBD | Not started | - |
+| 6. Discovery Loop | 2/3 | In Progress|  |
 | 7. Recipe Detail + Signal Logging | 0/TBD | Not started | - |
 | 8. Session Management + Success Inference | 0/TBD | Not started | - |
 | 9. Polish | 0/TBD | Not started | - |
