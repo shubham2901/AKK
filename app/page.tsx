@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import { useSessionStore } from '@/stores/session-store'
 import { shuffleArray } from '@/stores/session-store'
 import { fetchRecipes } from '@/lib/supabase/recipes'
+import { syncSession } from '@/services/session-sync'
+import { useSessionLifecycle } from '@/hooks/useSessionLifecycle'
 import OnboardingFlow from '@/components/onboarding/OnboardingFlow'
 import GreetingSplash from '@/components/session/GreetingSplash'
 import { DiscoveryCardStack } from '@/components/discovery/DiscoveryCardStack'
@@ -14,15 +16,26 @@ import type { Recipe } from '@/lib/types/database.types'
 
 export default function Home() {
   const hasHydrated = useSessionStore((s) => s._hasHydrated)
+  const sessionId = useSessionStore((s) => s.sessionId)
+  const preferences = useSessionStore((s) => s.preferences)
   const onboardingComplete = useSessionStore((s) => s.preferences.onboardingComplete)
   const setupComplete = useSessionStore((s) => s.session.setupComplete)
   const pool = useSessionStore((s) => s.session.pool)
-  const preferences = useSessionStore((s) => s.preferences)
   const recordViewed = useSessionStore((s) => s.recordViewed)
 
+  useSessionLifecycle()
+
+  const [synced, setSynced] = useState(false)
   const [fetchDone, setFetchDone] = useState(pool.length > 0)
   const [fetchError, setFetchError] = useState<string | null>(null)
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null)
+
+  useEffect(() => {
+    if (hasHydrated && sessionId.length >= 8 && !synced) {
+      syncSession(sessionId, preferences.diet, preferences.blocklist, [], [], null)
+      setSynced(true)
+    }
+  }, [hasHydrated, sessionId, synced, preferences.diet, preferences.blocklist])
 
   useEffect(() => {
     if (!setupComplete && pool.length === 0) {

@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useDragControls } from 'motion/react'
 import Image from 'next/image'
 import { useSessionStore } from '@/stores/session-store'
 import { logInteraction } from '@/services/interaction-logger'
+import { saveYoutubeOpen } from '@/lib/utils/youtube-tracker'
 import {
   extractWebRecipeUrl,
   getYouTubeAttribution,
@@ -202,9 +203,10 @@ export default function RecipeDetailOverlay({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-between p-5 border-2 border-charcoal bg-white hover:bg-primary/5 transition-colors rounded-xl"
-                    onClick={() =>
+                    onClick={() => {
                       logInteraction(sessionId, 'youtube_open', recipe.id)
-                    }
+                      saveYoutubeOpen(sessionId, recipe.id)
+                    }}
                   >
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 flex items-center justify-center bg-primary rounded-lg text-white">
