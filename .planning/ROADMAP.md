@@ -124,7 +124,7 @@ Plans:
   4. All interactions (swipe_next, swipe_prev, tap, youtube_open, web_open, found_my_pick, back_no_action, shuffle) logged fire-and-forget to Supabase
   5. Back arrow returns to discovery at same card position
   6. Recipe detail layout matches editorial mockup (stitch_screens/5_recipe_detail_editorial.html)
-**Plans:** 3 plans
+**Plans:** 1/3 plans executed
 
 Plans:
 - [ ] 07-01-PLAN.md — Session foundation (sessionId, pickedIds, viewedIds) + recipe-urls utility
@@ -172,6 +172,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 4. Session Setup | 0/1 | Planned | - |
 | 5. Recipe Pool | 1/1 | Complete    | 2026-03-13 |
 | 6. Discovery Loop | 3/3 | Complete   | 2026-03-13 |
-| 7. Recipe Detail + Signal Logging | 0/3 | Not started | - |
+| 7. Recipe Detail + Signal Logging | 1/3 | In Progress|  |
 | 8. Session Management + Success Inference | 0/TBD | Not started | - |
 | 9. Polish | 0/TBD | Not started | - |

@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
-**Current focus:** Phase 6 — Discovery Loop (Complete)
+**Current focus:** Phase 7 — Recipe Detail + Signal Logging (In Progress)
 
 ## Current Position
 
-Phase: 6 of 9 (Discovery Loop)
-Plan: 3 of 3 in current phase
-Status: Complete — 06-03 complete
-Last activity: 2026-03-13 — Completed 06-03-PLAN.md
+Phase: 7 of 9 (Recipe Detail + Signal Logging)
+Plan: 1 of 3 in current phase
+Status: In Progress — 07-01 complete
+Last activity: 2026-03-13 — Completed 07-01-PLAN.md
 
-Progress: [█████████░] 90%
+Progress: [█████████░] 91%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 3.9min
-- Total execution time: 16min
+- Total execution time: 21min
 
 **By Phase:**
 
@@ -40,6 +40,7 @@ Progress: [█████████░] 90%
 | Phase 06-discovery-loop P01 | 5min | 2 tasks | 3 files |
 | Phase 06-discovery-loop P02 | 5min | 2 tasks | 3 files |
 | Phase 06-discovery-loop P03 | 1min | 2 tasks | 2 files |
+| Phase 07-recipe-detail-signal-logging P01 | 5 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -62,6 +63,8 @@ Recent decisions affecting current work:
 - [Phase 05-recipe-pool]: Diet filter only in V0; blocklist/cuisine/ingredient deferred to Phase 6
 - [Phase 05-recipe-pool]: startSession preserves pool to avoid race when fetch completes before greeting ends
 - [Phase 06-discovery-loop]: Ingredient filter deferred per CONTEXT; cuisine + meal type only for filter bar foundation
+- [Phase 07-01]: pickedIds persisted; viewedIds session-only per CONTEXT
+- [Phase 07-01]: Session type unchanged; pickedIds/viewedIds at store root
 
 ### Pending Todos
 
@@ -74,5 +77,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Phase 7 planned (3 plans, 3 waves)
-Resume file: .planning/phases/07-recipe-detail-signal-logging/07-01-PLAN.md
+Stopped at: Completed 07-01-PLAN.md
+Resume file: .planning/phases/07-recipe-detail-signal-logging/07-02-PLAN.md
