@@ -1,4 +1,16 @@
+'use client'
+
+import { useSessionStore } from '@/stores/session-store'
+import OnboardingFlow from '@/components/onboarding/OnboardingFlow'
+
 export default function Home() {
+  const onboardingComplete = useSessionStore((s) => s.preferences.onboardingComplete)
+  const hasHydrated = useSessionStore((s) => s._hasHydrated)
+
+  if (!hasHydrated) return null
+
+  if (!onboardingComplete) return <OnboardingFlow />
+
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-6 max-w-md mx-auto border-x-2 border-charcoal">
       <h1 className="font-heading text-charcoal text-4xl font-extrabold tracking-[-0.04em] leading-[0.85] uppercase text-center">
@@ -27,5 +39,5 @@ export default function Home() {
         Find my recipe
       </button>
     </main>
-  );
+  )
 }
