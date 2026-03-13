@@ -49,6 +49,7 @@ interface SessionActions {
   touchActivity: () => void
 
   setSessionId: (id: string) => void
+  rotateSession: () => string
   togglePick: (recipeId: string) => void
   recordViewed: (recipeId: string) => void
 
@@ -127,6 +128,21 @@ export const useSessionStore = create<
       _setHasHydrated: (v) => set({ _hasHydrated: v }),
 
       setSessionId: (id) => set({ sessionId: id }),
+
+      rotateSession: () => {
+        const newId = crypto.randomUUID()
+        set((s) => ({
+          sessionId: newId,
+          session: {
+            ...s.session,
+            pool: shuffleArray(s.session.pool),
+            currentIndex: 0,
+            lastActiveAt: Date.now(),
+          },
+          viewedIds: [],
+        }))
+        return newId
+      },
 
       togglePick: (recipeId) =>
         set((s) => ({
