@@ -40,8 +40,10 @@ interface SessionActions {
   startSession: (cuisines: string[], ingredientFilter: string | null) => void
   setPool: (recipes: Recipe[]) => void
   setCurrentIndex: (index: number) => void
-  nextCard: () => void
-  prevCard: () => void
+  nextCard: (effectiveLen?: number) => void
+  prevCard: (effectiveLen?: number) => void
+  setCuisineFilter: (f: string[]) => void
+  setMealTypeFilter: (f: string[]) => void
   shufflePool: () => void
   resetSession: () => void
   touchActivity: () => void
@@ -63,10 +65,30 @@ const initialPreferences: Preferences = {
 const initialSession: Session = {
   cuisines: [],
   ingredientFilter: null,
+  cuisineFilter: [],
+  mealTypeFilter: [],
   pool: [],
   currentIndex: 0,
   lastActiveAt: Date.now(),
   setupComplete: false,
+}
+
+// ─── Filter Pool (client-side cuisine + meal type) ───
+
+export function filterPool(
+  pool: Recipe[],
+  cuisineFilter: string[],
+  mealTypeFilter: string[],
+): Recipe[] {
+  return pool.filter((r) => {
+    const matchCuisine =
+      cuisineFilter.length === 0 ||
+      r.cuisine_tags?.some((c) => cuisineFilter.includes(c)) === true
+    const matchMeal =
+      mealTypeFilter.length === 0 ||
+      r.meal_type?.some((m) => mealTypeFilter.includes(m)) === true
+    return matchCuisine && matchMeal
+  })
 }
 
 // ─── Fisher-Yates Shuffle ───
@@ -116,6 +138,8 @@ export const useSessionStore = create<
           session: {
             cuisines,
             ingredientFilter,
+            cuisineFilter: [],
+            mealTypeFilter: [],
             pool: s.session.pool,
             currentIndex: 0,
             lastActiveAt: Date.now(),
@@ -133,17 +157,31 @@ export const useSessionStore = create<
           session: { ...s.session, currentIndex: index },
         })),
 
-      nextCard: () =>
+      nextCard: (effectiveLen) =>
         set((s) => {
-          const next = Math.min(s.session.currentIndex + 1, s.session.pool.length - 1)
+          const len = effectiveLen ?? s.session.pool.length
+          if (len === 0) return { session: { ...s.session, lastActiveAt: Date.now() } }
+          const next = (s.session.currentIndex + 1) % len
           return { session: { ...s.session, currentIndex: next, lastActiveAt: Date.now() } }
         }),
 
-      prevCard: () =>
+      prevCard: (effectiveLen) =>
         set((s) => {
-          const prev = Math.max(s.session.currentIndex - 1, 0)
+          const len = effectiveLen ?? s.session.pool.length
+          if (len === 0) return { session: { ...s.session, lastActiveAt: Date.now() } }
+          const prev = (s.session.currentIndex + len - 1) % len
           return { session: { ...s.session, currentIndex: prev, lastActiveAt: Date.now() } }
         }),
+
+      setCuisineFilter: (f) =>
+        set((s) => ({
+          session: { ...s.session, cuisineFilter: f, currentIndex: 0, lastActiveAt: Date.now() },
+        })),
+
+      setMealTypeFilter: (f) =>
+        set((s) => ({
+          session: { ...s.session, mealTypeFilter: f, currentIndex: 0, lastActiveAt: Date.now() },
+        })),
 
       shufflePool: () =>
         set((s) => ({

@@ -310,6 +310,8 @@ export interface Preferences {
 export interface Session {
   cuisines: string[]
   ingredientFilter: string | null
+  cuisineFilter: string[]
+  mealTypeFilter: string[]
   pool: Recipe[]
   currentIndex: number
   lastActiveAt: number
