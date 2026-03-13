@@ -1,0 +1,201 @@
+# Requirements: Aaj Kya Khana Hai?
+
+**Defined:** 2026-03-11
+**Core Value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
+
+## v1 Requirements
+
+Requirements for initial release. Each maps to roadmap phases.
+
+### Foundation
+
+- [ ] **FOUN-01**: App loads on mobile Chrome/Safari with no white flash or layout jank
+- [ ] **FOUN-02**: Syne (headings) and Plus Jakarta Sans (body) load without FOUC via next/font
+- [ ] **FOUN-03**: Design system tokens (colors, borders, radius, shadows) applied globally via Tailwind config
+- [ ] **FOUN-04**: Mobile-first layout with max-w-md container, touch-friendly targets (min 44px)
+
+### Data Layer
+
+- [ ] **DATA-01**: Supabase client configured with anon key for public recipe reads
+- [ ] **DATA-02**: TypeScript interfaces for Recipe, UserSession, UserInteraction, SessionState
+- [ ] **DATA-03**: Zustand store for session state (preferences, pool, card index, filters)
+- [ ] **DATA-04**: Zustand persist middleware syncs session state to localStorage
+
+### Onboarding
+
+- [ ] **ONBR-01**: User can select diet preference (Vegetarian / Non-Veg / Vegan) on first launch
+- [ ] **ONBR-02**: User can select cuisine blocklist (multi-select chips) on first launch
+- [ ] **ONBR-03**: Onboarding data saved to localStorage and never shown again
+- [ ] **ONBR-04**: Diet screen shows 3 vertical cards with icons per design mockup
+- [ ] **ONBR-05**: Blocklist screen shows asymmetric tag cloud with rotated chips per design mockup
+
+### Session Setup
+
+- [ ] **SESS-01**: User selects 1-3 cuisines for this session (mandatory, excludes blocklist)
+- [ ] **SESS-02**: User can optionally select one ingredient filter (single-select, visible skip)
+- [ ] **SESS-03**: Session cuisine screen shows grid cards per design mockup
+- [ ] **SESS-04**: Session starts immediately after setup completes
+
+### Recipe Pool
+
+- [ ] **POOL-01**: Recipe pool fetched from Supabase with server-side filters (diet, blocklist, cuisine, ingredient)
+- [ ] **POOL-02**: Pool randomized on client and order fixed for session duration
+- [ ] **POOL-03**: Minimum pool size of 5 recipes; empty state shown if fewer
+- [ ] **POOL-04**: Pool stored in Zustand and survives page refresh within session
+
+### Discovery Loop
+
+- [ ] **DISC-01**: Full-screen recipe card with food photo, recipe name (Syne), cuisine/diet chips, one-line hook
+- [ ] **DISC-02**: Swipe right/up for next card, swipe left/down for previous card
+- [ ] **DISC-03**: Tap anywhere on card opens Recipe Detail overlay
+- [ ] **DISC-04**: Shuffle button (top right) re-randomizes pool and resets position to 0
+- [ ] **DISC-05**: Card swipe uses spring physics (snap and pop, physical movement off screen)
+- [ ] **DISC-06**: Discovery card layout matches immersive design mockup (full-bleed photo, dark gradient, white text)
+- [ ] **DISC-07**: Filter bar at bottom with cuisine / meal type / ingredient bottom sheet filters
+
+### Recipe Detail
+
+- [ ] **DETL-01**: Recipe detail slides up as overlay over discovery card (not full page nav)
+- [ ] **DETL-02**: Shows food photo with hard border, recipe name, cuisine/diet chips, one-line hook
+- [ ] **DETL-03**: "Watch on YouTube" button opens YouTube link in new tab
+- [ ] **DETL-04**: "Full Recipe" button opens Hebbar's Kitchen web link in new tab
+- [ ] **DETL-05**: "Found my pick" CTA (full width, Burnt Orange fill) logs found_my_pick, shows toast, changes button to "Picked"
+- [ ] **DETL-06**: Back arrow returns to discovery at same card position
+- [ ] **DETL-07**: Recipe detail layout matches editorial design mockup
+
+### Signal Logging
+
+- [ ] **LOGG-01**: All user interactions logged silently to user_interactions table in Supabase
+- [ ] **LOGG-02**: Actions logged: swipe_next, swipe_prev, tap, youtube_open, web_open, found_my_pick, back_no_action, shuffle
+- [ ] **LOGG-03**: Logging is fire-and-forget (no await, no UI feedback)
+- [ ] **LOGG-04**: Each log includes session_id, recipe_id, action, timestamp, metadata
+
+### Session Management
+
+- [ ] **SMGM-01**: Anonymous session created with UUID on first app open
+- [ ] **SMGM-02**: Session state (card position, pool order, filters) persists in localStorage across refresh
+- [ ] **SMGM-03**: New session created after 4 hours of inactivity (based on last_active_at timestamp)
+- [ ] **SMGM-04**: Session data synced to user_sessions table in Supabase on creation
+
+### Success Inference
+
+- [ ] **SINF-01**: When user opens YouTube link, timestamp recorded in localStorage
+- [ ] **SINF-02**: On next app open, if >2 hours since youtube_open, log session_success_inferred for that recipe
+
+### Settings
+
+- [ ] **SETT-01**: Settings page accessible from discovery screen
+- [ ] **SETT-02**: User can edit diet preference
+- [ ] **SETT-03**: User can edit cuisine blocklist
+- [ ] **SETT-04**: Changes apply immediately and trigger pool rebuild on next session
+
+### Empty State
+
+- [ ] **EMPT-01**: Empty state shown when pool has fewer than 5 recipes after filtering
+- [ ] **EMPT-02**: Shows blob illustration, "Hmm. Nothing here." text per design mockup
+- [ ] **EMPT-03**: "Reset filters" button clears session filters
+- [ ] **EMPT-04**: "Shuffle anyway" button re-randomizes with current filters
+
+## v2 Requirements
+
+Deferred to future release. Tracked but not in current roadmap.
+
+### Personalisation
+
+- **PERS-01**: Recipe pool ranked by past interaction signals (yes, maybe, swipe patterns)
+- **PERS-02**: "Used" recipes deprioritized in future sessions
+
+### Vibe System
+
+- **VIBE-01**: 8 vibe categories for mood-based discovery
+- **VIBE-02**: Vibe selection at session start as alternative to cuisine pick
+
+### Social
+
+- **SOCL-01**: Partner sync for shared recipe discovery sessions
+- **SOCL-02**: "Did you make this?" feedback loop for return visits
+
+### Engagement
+
+- **ENGM-01**: Push notifications for dinner-time nudge
+- **ENGM-02**: "Maybe" nudge at session start with previously seen recipes
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Search | Contradicts the core no-search philosophy |
+| User accounts / login | Anonymous sessions validate the core loop first |
+| Meal planning | Different job-to-be-done; scope creep |
+| Grocery lists | Different workflow, not discovery |
+| Calorie / nutrition data | Not available in source data |
+| Native Android / iOS app | Post web PMF validation |
+| Recipe import / clipping | Curated source, not personal library |
+| Complex filter bar | Slips toward browsing; analysis paralysis |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| FOUN-01 | Phase 1 | Pending |
+| FOUN-02 | Phase 1 | Pending |
+| FOUN-03 | Phase 1 | Pending |
+| FOUN-04 | Phase 1 | Pending |
+| DATA-01 | Phase 2 | Pending |
+| DATA-02 | Phase 2 | Pending |
+| DATA-03 | Phase 2 | Pending |
+| DATA-04 | Phase 2 | Pending |
+| ONBR-01 | Phase 6 | Pending |
+| ONBR-02 | Phase 6 | Pending |
+| ONBR-03 | Phase 6 | Pending |
+| ONBR-04 | Phase 6 | Pending |
+| ONBR-05 | Phase 6 | Pending |
+| SESS-01 | Phase 6 | Pending |
+| SESS-02 | Phase 6 | Pending |
+| SESS-03 | Phase 6 | Pending |
+| SESS-04 | Phase 6 | Pending |
+| POOL-01 | Phase 3 | Pending |
+| POOL-02 | Phase 3 | Pending |
+| POOL-03 | Phase 3 | Pending |
+| POOL-04 | Phase 3 | Pending |
+| DISC-01 | Phase 4 | Pending |
+| DISC-02 | Phase 4 | Pending |
+| DISC-03 | Phase 4 | Pending |
+| DISC-04 | Phase 4 | Pending |
+| DISC-05 | Phase 4 | Pending |
+| DISC-06 | Phase 4 | Pending |
+| DISC-07 | Phase 4 | Pending |
+| DETL-01 | Phase 5 | Pending |
+| DETL-02 | Phase 5 | Pending |
+| DETL-03 | Phase 5 | Pending |
+| DETL-04 | Phase 5 | Pending |
+| DETL-05 | Phase 5 | Pending |
+| DETL-06 | Phase 5 | Pending |
+| DETL-07 | Phase 5 | Pending |
+| LOGG-01 | Phase 5 | Pending |
+| LOGG-02 | Phase 5 | Pending |
+| LOGG-03 | Phase 5 | Pending |
+| LOGG-04 | Phase 5 | Pending |
+| SMGM-01 | Phase 7 | Pending |
+| SMGM-02 | Phase 7 | Pending |
+| SMGM-03 | Phase 7 | Pending |
+| SMGM-04 | Phase 7 | Pending |
+| SINF-01 | Phase 7 | Pending |
+| SINF-02 | Phase 7 | Pending |
+| SETT-01 | Phase 7 | Pending |
+| SETT-02 | Phase 7 | Pending |
+| SETT-03 | Phase 7 | Pending |
+| SETT-04 | Phase 7 | Pending |
+| EMPT-01 | Phase 7 | Pending |
+| EMPT-02 | Phase 7 | Pending |
+| EMPT-03 | Phase 7 | Pending |
+| EMPT-04 | Phase 7 | Pending |
+
+**Coverage:**
+- v1 requirements: 49 total
+- Mapped to phases: 49
+- Unmapped: 0
+
+---
+*Requirements defined: 2026-03-11*
+*Last updated: 2026-03-11 after initial definition*
