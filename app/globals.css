@@ -1,26 +1,29 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* Colors */
+  --color-primary: #e8612c;
+  --color-charcoal: #181311;
+  --color-bg-light: #fff9f5;
+  --color-bg-dark: #211511;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Shadows (neo-brutalist offset, no blur) */
+  --shadow-small: 4px 4px 0px #181311;
+  --shadow-medium: 6px 6px 0px #181311;
+  --shadow-large: 8px 8px 0px #181311;
+
+  /* Radius */
+  --radius-default: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Fonts (reference next/font CSS vars from layout) */
+  --font-heading: var(--font-syne), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-body), ui-sans-serif, sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-light);
+  color: var(--color-charcoal);
 }
