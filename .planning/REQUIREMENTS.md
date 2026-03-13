@@ -72,10 +72,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Session Management
 
-- [ ] **SMGM-01**: Anonymous session created with UUID on first app open
-- [ ] **SMGM-02**: Session state (card position, pool order, filters) persists in localStorage across refresh
-- [ ] **SMGM-03**: New session created after 4 hours of inactivity (based on last_active_at timestamp)
-- [ ] **SMGM-04**: Session data synced to user_sessions table in Supabase on creation
+- [x] **SMGM-01**: Anonymous session created with UUID on first app open
+- [x] **SMGM-02**: Session state (card position, pool order, filters) persists in localStorage across refresh
+- [x] **SMGM-03**: New session created after 4 hours of inactivity (based on last_active_at timestamp)
+- [x] **SMGM-04**: Session data synced to user_sessions table in Supabase on creation
 
 ### Success Inference
 
@@ -176,10 +176,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | LOGG-02 | Phase 7 | Complete |
 | LOGG-03 | Phase 7 | Complete |
 | LOGG-04 | Phase 7 | Complete |
-| SMGM-01 | Phase 8 | Pending |
-| SMGM-02 | Phase 8 | Pending |
-| SMGM-03 | Phase 8 | Pending |
-| SMGM-04 | Phase 8 | Pending |
+| SMGM-01 | Phase 8 | Complete |
+| SMGM-02 | Phase 8 | Complete |
+| SMGM-03 | Phase 8 | Complete |
+| SMGM-04 | Phase 8 | Complete |
 | SINF-01 | Phase 8 | Pending |
 | SINF-02 | Phase 8 | Pending |
 | SETT-01 | Phase 9 | Pending |

@@ -140,10 +140,11 @@ Plans:
   2. Card position, pool order, and filters survive page refresh within session
   3. New session created after 4 hours of inactivity (based on last_active_at)
   4. When user opens YouTube link, timestamp recorded; on next open, if >2 hours since youtube_open, session_success_inferred logged
-**Plans**: TBD
+**Plans:** 1/2 plans executed
 
 Plans:
-- [ ] 08-01: TBD
+- [x] 08-01-PLAN.md — Session lifecycle infrastructure (eager sessionId, rotateSession, syncSession service)
+- [ ] 08-02-PLAN.md — Lifecycle hook + YouTube tracking + integration
 
 ### Phase 9: Polish
 **Goal**: Empty state when pool < 5; settings to edit diet and blocklist
@@ -173,5 +174,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 5. Recipe Pool | 1/1 | Complete    | 2026-03-13 |
 | 6. Discovery Loop | 3/3 | Complete   | 2026-03-13 |
 | 7. Recipe Detail + Signal Logging | 3/3 | Complete | 2026-03-13 |
-| 8. Session Management + Success Inference | 0/TBD | Not started | - |
+| 8. Session Management + Success Inference | 1/2 | In Progress|  |
 | 9. Polish | 0/TBD | Not started | - |

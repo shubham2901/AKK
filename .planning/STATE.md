@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
-**Current focus:** Phase 8 — Session Management + Success Inference (next)
+**Current focus:** Phase 8 — Session Management + Success Inference
 
 ## Current Position
 
-Phase: 7 of 9 (Recipe Detail + Signal Logging)
-Plan: 3 of 3 in current phase
-Status: Complete — Phase 7 done
-Last activity: 2026-03-13 — Completed 07-03-PLAN.md
+Phase: 8 of 9 (Session Management + Success Inference)
+Plan: 1 of 2 in current phase
+Status: In progress — 08-01 complete, 08-02 next
+Last activity: 2026-03-13 — Completed 08-01-PLAN.md
 
 Progress: [██████████] 100%
 
@@ -43,6 +43,7 @@ Progress: [██████████] 100%
 | Phase 07-recipe-detail-signal-logging P01 | 5 | 2 tasks | 2 files |
 | Phase 07-recipe-detail-signal-logging P02 | 5 | 1 task | 1 file |
 | Phase 07-recipe-detail-signal-logging P03 | 5 | 3 tasks | 4 files |
+| Phase 08-session-management-success-inference P01 | 5 | 3 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 07-01]: pickedIds persisted; viewedIds session-only per CONTEXT
 - [Phase 07-01]: Session type unchanged; pickedIds/viewedIds at store root
 - [Phase 07-02]: Drag handle only for swipe-down (avoids scroll conflict)
+- [Phase 08-session-management-success-inference]: Eager sessionId in onRehydrateStorage; sync deferred to Plan 08-02 useSessionLifecycle
+- [Phase 08-session-management-success-inference]: rotateSession preserves pool (reshuffled), filters, pickedIds; clears viewedIds
 
 ### Pending Todos
 
@@ -81,4 +84,4 @@ None yet.
 
 Last session: 2026-03-13
 Stopped at: Completed 07-03-PLAN.md
-Resume file: .planning/phases/08-session-management-success-inference
+Resume file: .planning/phases/08-session-management-success-inference/08-02-PLAN.md
