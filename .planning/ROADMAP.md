@@ -16,7 +16,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 - [ ] **Phase 4: Session Setup** - Cuisine pick and optional ingredient filter per session
 - [x] **Phase 5: Recipe Pool** - Fetch, filter, randomize; min 5 recipes, survives refresh (completed 2026-03-13)
 - [x] **Phase 6: Discovery Loop** - Full-screen cards, swipe navigation, filter bar, shuffle (completed 2026-03-13)
-- [ ] **Phase 7: Recipe Detail + Signal Logging** - Overlay, YouTube/web links, Found my pick, fire-and-forget logging
+- [x] **Phase 7: Recipe Detail + Signal Logging** - Overlay, YouTube/web links, Found my pick, fire-and-forget logging (completed 2026-03-13)
 - [ ] **Phase 8: Session Management + Success Inference** - Anonymous sessions, 4hr timeout, success inference
 - [ ] **Phase 9: Polish** - Empty state, settings page, reset/shuffle
 
@@ -124,12 +124,12 @@ Plans:
   4. All interactions (swipe_next, swipe_prev, tap, youtube_open, web_open, found_my_pick, back_no_action, shuffle) logged fire-and-forget to Supabase
   5. Back arrow returns to discovery at same card position
   6. Recipe detail layout matches editorial mockup (stitch_screens/5_recipe_detail_editorial.html)
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [x] 07-01-PLAN.md — Session foundation (sessionId, pickedIds, viewedIds) + recipe-urls utility
 - [x] 07-02-PLAN.md — RecipeDetailOverlay (slide-up, links, CTA, toggle)
-- [ ] 07-03-PLAN.md — Integration, logging, card badges
+- [x] 07-03-PLAN.md — Integration, logging, card badges
 
 ### Phase 8: Session Management + Success Inference
 **Goal**: Anonymous sessions persist; new session after 4hr inactivity; success inferred when user doesn't return after YouTube
@@ -172,6 +172,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 4. Session Setup | 0/1 | Planned | - |
 | 5. Recipe Pool | 1/1 | Complete    | 2026-03-13 |
 | 6. Discovery Loop | 3/3 | Complete   | 2026-03-13 |
-| 7. Recipe Detail + Signal Logging | 2/3 | In Progress|  |
+| 7. Recipe Detail + Signal Logging | 3/3 | Complete | 2026-03-13 |
 | 8. Session Management + Success Inference | 0/TBD | Not started | - |
 | 9. Polish | 0/TBD | Not started | - |

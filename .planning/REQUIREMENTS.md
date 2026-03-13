@@ -55,19 +55,19 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Recipe Detail
 
-- [ ] **DETL-01**: Recipe detail slides up as overlay over discovery card (not full page nav)
+- [x] **DETL-01**: Recipe detail slides up as overlay over discovery card (not full page nav)
 - [x] **DETL-02**: Shows food photo with hard border, recipe name, cuisine/diet chips, one-line hook
-- [ ] **DETL-03**: "Watch on YouTube" button opens YouTube link in new tab
+- [x] **DETL-03**: "Watch on YouTube" button opens YouTube link in new tab
 - [x] **DETL-04**: "Full Recipe" button opens Hebbar's Kitchen web link in new tab
 - [x] **DETL-05**: "Found my pick" CTA (full width, Burnt Orange fill) logs found_my_pick, shows toast, changes button to "Picked"
-- [ ] **DETL-06**: Back arrow returns to discovery at same card position
-- [ ] **DETL-07**: Recipe detail layout matches editorial design mockup
+- [x] **DETL-06**: Back arrow returns to discovery at same card position
+- [x] **DETL-07**: Recipe detail layout matches editorial design mockup
 
 ### Signal Logging
 
-- [ ] **LOGG-01**: All user interactions logged silently to user_interactions table in Supabase
-- [ ] **LOGG-02**: Actions logged: swipe_next, swipe_prev, tap, youtube_open, web_open, found_my_pick, back_no_action, shuffle
-- [ ] **LOGG-03**: Logging is fire-and-forget (no await, no UI feedback)
+- [x] **LOGG-01**: All user interactions logged silently to user_interactions table in Supabase
+- [x] **LOGG-02**: Actions logged: swipe_next, swipe_prev, tap, youtube_open, web_open, found_my_pick, back_no_action, shuffle
+- [x] **LOGG-03**: Logging is fire-and-forget (no await, no UI feedback)
 - [x] **LOGG-04**: Each log includes session_id, recipe_id, action, timestamp, metadata
 
 ### Session Management
@@ -165,16 +165,16 @@ Deferred to future release. Tracked but not in current roadmap.
 | DISC-05 | Phase 6 | Complete |
 | DISC-06 | Phase 6 | Complete |
 | DISC-07 | Phase 6 | Complete |
-| DETL-01 | Phase 7 | Pending |
+| DETL-01 | Phase 7 | Complete |
 | DETL-02 | Phase 7 | Complete |
-| DETL-03 | Phase 7 | Pending |
+| DETL-03 | Phase 7 | Complete |
 | DETL-04 | Phase 7 | Complete |
 | DETL-05 | Phase 7 | Complete |
-| DETL-06 | Phase 7 | Pending |
-| DETL-07 | Phase 7 | Pending |
-| LOGG-01 | Phase 7 | Pending |
-| LOGG-02 | Phase 7 | Pending |
-| LOGG-03 | Phase 7 | Pending |
+| DETL-06 | Phase 7 | Complete |
+| DETL-07 | Phase 7 | Complete |
+| LOGG-01 | Phase 7 | Complete |
+| LOGG-02 | Phase 7 | Complete |
+| LOGG-03 | Phase 7 | Complete |
 | LOGG-04 | Phase 7 | Complete |
 | SMGM-01 | Phase 8 | Pending |
 | SMGM-02 | Phase 8 | Pending |
