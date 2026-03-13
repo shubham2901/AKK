@@ -1,7 +1,7 @@
 # Domain Pitfalls
 
-**Domain:** Swipe-based recipe discovery web app (mobile-first, Next.js 14, Framer Motion, Supabase, Zustand)  
-**Researched:** 2025-03-13  
+**Domain:** Swipe-based recipe discovery web app (mobile-first, Next.js 15, Motion, Supabase, Zustand)  
+**Researched:** 2026-03-13  
 **Confidence:** MEDIUM (WebSearch + official docs; some findings from community reports)
 
 ## Critical Pitfalls
@@ -12,17 +12,15 @@
 The app fetches all recipes from Supabase, then filters and shuffles on the client. At 100 recipes this feels fine; at 3,120 recipes it causes slow initial load, high memory use, and poor mobile performance. Supabase docs explicitly recommend server-side filtering.
 
 **Why it happens:**
-"Fetch once, filter locally" seems simpler than building dynamic queries. AI agents often generate this pattern because it avoids query composition logic. The PRD explicitly calls for client-side filtering.
+"Fetch once, filter locally" seems simpler than building dynamic queries. AI agents often generate this pattern because it avoids query composition logic.
 
-**How to avoid:**
-- Use Supabase `.in()`, `.contains()`, `.overlaps()` for diet_tags, cuisine_tags, meal_type at query time.
-- Apply `order by random()` or a seeded random in Postgres for shuffle; fetch in batches (e.g., 50–100 per session).
-- Keep client-side filtering only for runtime filters (e.g., ingredient) that can't be expressed efficiently in SQL, or accept a second round-trip for those.
+**Resolution (RESOLVED):**
+Architecture now specifies server-side filtering for the base pool. Supabase query uses `.contains()`, `.overlaps()` on GIN-indexed array columns (diet_tags, cuisine_tags, meal_type, main_ingredients). Client handles only randomization.
 
-**Warning signs:**
-- Single `supabase.from('recipes').select('*')` with no `.eq()` / `.in()` / `.contains()`.
-- Filter logic in `useEffect` or Zustand that runs after fetch.
-- No `limit` on the initial query.
+**How to verify during implementation:**
+- Recipe pool service query MUST have `.contains()` / `.overlaps()` — no bare `select('*')`.
+- No diet/cuisine/blocklist filter logic in `useEffect` or Zustand after fetch.
+- Only randomization and session-specific transforms (e.g., re-shuffle) happen on the client.
 
 **Phase to address:**
 Phase: Data / Supabase integration (before discovery loop).
@@ -52,13 +50,13 @@ Phase: Session persistence / onboarding.
 
 ---
 
-### Pitfall 3: Framer Motion + Next.js 14 App Router Hydration / SSR
+### Pitfall 3: Motion + Next.js 15 App Router Hydration / SSR
 
 **What goes wrong:**
-Framer Motion uses `window` and browser APIs unavailable during SSR. Using it without `"use client"` causes hydration errors or "Detected multiple renderers concurrently rendering the same context provider." Animations may not run or components may flash.
+Motion uses `window` and browser APIs unavailable during SSR. Using it without `"use client"` causes hydration errors or "Detected multiple renderers concurrently rendering the same context provider." Animations may not run or components may flash.
 
 **Why it happens:**
-Next.js 14 App Router is server-first; Framer Motion is client-only. AI agents often add `motion` components without the `"use client"` directive or place them in server components.
+Next.js 15 App Router is server-first; Motion is client-only. AI agents often add `motion` components without the `"use client"` directive or place them in server components.
 
 **How to avoid:**
 - Add `"use client"` at the top of any file that imports `motion` or `AnimatePresence`.
@@ -200,10 +198,10 @@ Phase: Discovery loop / swipe card implementation.
 
 | Shortcut | Immediate Benefit | Long-term Cost | When Acceptable |
 |----------|-------------------|----------------|------------------|
-| Fetch all recipes, filter client-side | Simpler query logic | Slow load at 1K+ recipes, high memory | V0 with ≤100 recipes only; document migration path |
+| Fetch all recipes, filter client-side | Simpler query logic | Slow load at 1K+ recipes, high memory | NEVER; use server-side filtering from day one (resolved) |
 | localStorage for preferences | No backend, no auth | Data loss on mobile, private browsing | V0; add fallback messaging |
 | External YouTube thumbnails | Free, no storage | CORS, availability, hotlink risk | V0; plan migration if issues arise |
-| No error boundaries | Faster ship | White screen on uncaught errors | Never; add at least app-level boundary |
+| No error boundaries | Faster ship | White screen on uncaught errors | NEVER; app-level boundary is mandatory from Phase 1 (see ARCHITECTURE.md Pattern 6) |
 | Index as AnimatePresence key | Quick to write | Broken exit animations | Never |
 | Zustand destructuring whole store | Less boilerplate | Unnecessary re-renders | Never; use selectors |
 
@@ -318,4 +316,4 @@ Phase: Discovery loop / swipe card implementation.
 
 ---
 *Pitfalls research for: Aaj Kya Khana Hai? — swipe-based recipe discovery web app*  
-*Researched: 2025-03-13*
+*Researched: 2026-03-13*

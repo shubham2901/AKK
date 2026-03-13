@@ -2,7 +2,7 @@
 
 **Domain:** Swipe-based recipe discovery web app  
 **Project:** Aaj Kya Khana Hai? (AKK)  
-**Researched:** 2025-03-13  
+**Researched:** 2026-03-13  
 **Confidence:** HIGH
 
 ## Standard Architecture
@@ -57,7 +57,7 @@
 | **Recipe Detail Overlay** | Bottom sheet over discovery; photo, chips, links, "Found my pick" | Zustand (current recipe), Interaction Logger |
 | **Empty State** | Shown when filtered pool &lt; 5 recipes; reset/shuffle options | Zustand, Session Setup |
 | **Zustand Store** | Session state, preferences, recipe pool, current index; syncs to localStorage | All UI components |
-| **Recipe Pool Service** | Fetch from Supabase once; filter (diet, blocklist, cuisine, ingredient); randomize | Supabase, Zustand |
+| **Recipe Pool Service** | Fetch from Supabase with server-side filters (diet, blocklist, cuisine, ingredient); randomize on client | Supabase, Zustand |
 | **Interaction Logger** | Fire-and-forget inserts to `user_interactions` | Supabase |
 
 ## Recommended Project Structure
@@ -114,16 +114,21 @@ src/
     ↓
 Zustand: needs pool? → Recipe Pool Service
     ↓
-Supabase.from('recipes').select('*')  (once per session)
+Supabase query with SERVER-SIDE filters:
+  .select(needed_columns)
+  .contains('diet_tags', [diet_preference])     — if Veg/Vegan
+  .overlaps('cuisine_tags', [session_cuisines])  — match any selected
+  NOT .overlaps('cuisine_tags', [blocklist])     — exclude blocked
+  .contains('main_ingredients', [ingredient])    — if ingredient set
     ↓
-Filter: diet + cuisine_blocklist + session_cuisine + ingredient
-    ↓
-Randomize (Fisher–Yates or similar)
+Client: Randomize result (Fisher–Yates)
     ↓
 Zustand: set pool, reset index to 0
     ↓
 Card Stack renders from pool[index]
 ```
+
+**Key principle:** Heavy filtering (diet, cuisine, blocklist) happens in Supabase via GIN-indexed array queries. Client-side handles only randomization and session transforms.
 
 ### Swipe / Interaction Flow
 
@@ -169,11 +174,11 @@ Else → redirect to /session (new session)
 
 ## Architectural Patterns
 
-### Pattern 1: Single Fetch, Client-Side Filter
+### Pattern 1: Server-Side Filter, Client-Side Randomize
 
-**What:** Fetch full recipe set once from Supabase on session start; filter and randomize on the client.  
-**When:** Pool size is manageable (100–3,120 rows); no real-time updates needed.  
-**Trade-offs:** Fast subsequent interactions; initial load pays the cost. Avoids N+1 or per-swipe fetches.
+**What:** Apply all heavy filters (diet, cuisine, blocklist, ingredient) as Supabase query conditions using GIN-indexed array columns. Randomize the result on the client.  
+**When:** Always. Server-side filtering is correct at any scale. Client-side randomization is fine since the filtered pool is small (typically 50-500 recipes).  
+**Trade-offs:** Slightly more complex query composition; but correct from day one. No migration needed at scale.
 
 ```typescript
 // lib/recipe-pool.ts
@@ -181,8 +186,26 @@ export async function fetchAndPreparePool(
   supabase: SupabaseClient,
   filters: SessionFilters
 ): Promise<Recipe[]> {
-  const { data } = await supabase.from('recipes').select('*');
-  return filterAndRandomize(data ?? [], filters);
+  let query = supabase
+    .from('recipes')
+    .select('id, video_id, recipe_name_english, thumbnail, diet_tags, cuisine_tags, meal_type, one_line_hook, url, web_recipe_link, main_ingredients, total_time_mins, difficulty');
+
+  if (filters.diet === 'Vegetarian') {
+    query = query.contains('diet_tags', ['Vegetarian']);
+  } else if (filters.diet === 'Vegan') {
+    query = query.contains('diet_tags', ['Vegan']);
+  } else if (filters.diet === 'Non-Veg') {
+    query = query.overlaps('diet_tags', ['Non-Veg', 'Eggetarian']);
+  }
+
+  if (filters.cuisines.length > 0) {
+    query = query.overlaps('cuisine_tags', filters.cuisines);
+  }
+
+  // Blocklist exclusion handled via .not or RPC
+  // Randomize on client after fetch
+  const { data } = await query;
+  return shuffleArray(data ?? []);
 }
 ```
 
@@ -243,11 +266,63 @@ export const useSessionStore = create(
 **When:** User should return to same card position; avoid full-page navigation.  
 **Trade-offs:** Simpler state; overlay must handle scroll lock and focus trap for a11y.
 
+### Pattern 6: App-Level Error Boundary
+
+**What:** A React Error Boundary at the root layout catches any unhandled render error and shows a branded fallback UI (not a white screen). The fallback includes a "Try again" button that reloads the page.  
+**When:** Always. This is mandatory from Phase 1.  
+**Trade-offs:** Minimal effort; prevents the worst UX failure (blank white screen).
+
+```typescript
+// components/ErrorBoundary.tsx
+'use client';
+import { Component, ReactNode } from 'react';
+
+interface Props { children: ReactNode; }
+interface State { hasError: boolean; }
+
+class ErrorBoundary extends Component<Props, State> {
+  state: State = { hasError: false };
+
+  static getDerivedStateFromError(): State {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error) {
+    console.error('App error boundary caught:', error);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-screen p-8 text-center">
+          <h1 className="font-syne text-2xl font-bold mb-4">
+            Oops! Something broke.
+          </h1>
+          <p className="mb-6 text-charcoal/70">
+            We hit an unexpected error. Try refreshing.
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-6 py-3 bg-burnt-orange text-white font-bold border-2 border-charcoal rounded-lg"
+          >
+            Try again
+          </button>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+export default ErrorBoundary;
+```
+
+**Implementation:** Wrap the root layout's `{children}` with `<ErrorBoundary>`. Place it inside providers but outside route content.
+
 ## Build Order (Dependencies)
 
 | Phase | Deliverable | Depends On | Notes |
 |-------|-------------|------------|-------|
-| **1** | App shell, layout, fonts | — | Next.js 14 App Router, Tailwind, design tokens |
+| **1** | App shell, layout, fonts | — | Next.js 15 App Router, Tailwind, design tokens |
 | **2** | Supabase client + types | — | `lib/supabase.ts`, `lib/types.ts` from schema |
 | **3** | Zustand store + persist | — | Session, preferences, pool, index; localStorage key |
 | **4** | Recipe pool service | 2, 3 | Fetch, filter, randomize; no UI |
@@ -266,7 +341,7 @@ export const useSessionStore = create(
 
 **What people do:** Fetch next recipe on each swipe.  
 **Why it's wrong:** Latency on every swipe; janky UX.  
-**Do this instead:** Fetch full pool once; filter and randomize on client.
+**Do this instead:** Fetch filtered pool once via server-side Supabase query; randomize on client.
 
 ### Anti-Pattern 2: Recipe Detail as Route
 
@@ -292,7 +367,7 @@ export const useSessionStore = create(
 
 | Operation | Pattern | Notes |
 |-----------|---------|-------|
-| Recipes read | `supabase.from('recipes').select('*')` | Client-side; RLS allows public read |
+| Recipes read | `supabase.from('recipes').select(cols).contains().overlaps()` | Server-side filtered; GIN indexes; RLS public read |
 | Sessions insert | `supabase.from('user_sessions').insert(...)` | On session start; fire-and-forget ok |
 | Interactions insert | `supabase.from('user_interactions').insert(...)` | Fire-and-forget; no await |
 
@@ -309,13 +384,13 @@ export const useSessionStore = create(
 
 | Scale | Architecture Adjustments |
 |-------|---------------------------|
-| 100 recipes (V0) | Monolith fine; fetch all; persist pool in memory; localStorage for session_id + index only |
-| 3,120 recipes | Consider fetching filtered subset server-side if client filter is slow; or paginate initial load |
+| 100 recipes (V0) | Server-side filter still applies; persist pool in memory; localStorage for session_id + index only |
+| 3,120 recipes | Server-side filter keeps payload small; GIN indexes handle array queries efficiently |
 | 10K+ users | Supabase handles; ensure RLS; interaction inserts are append-only, low cost |
 
 ### Scaling Priorities
 
-1. **First bottleneck:** Initial recipe fetch for 3,120 rows. Mitigate: server-side filter by diet/cuisine before sending, or paginate.
+1. **First bottleneck:** Already mitigated — server-side filtering via GIN indexes ensures only relevant recipes are sent. Payload stays small regardless of total recipe count.
 2. **Second bottleneck:** localStorage size if persisting too much. Mitigate: persist only IDs + index; re-fetch pool on restore if needed.
 
 ## Sources
@@ -328,4 +403,4 @@ export const useSessionStore = create(
 
 ---
 *Architecture research for: Aaj Kya Khana Hai? — swipe-based recipe discovery*
-*Researched: 2025-03-13*
+*Researched: 2026-03-13*

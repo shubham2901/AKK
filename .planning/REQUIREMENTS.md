@@ -16,10 +16,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Data Layer
 
-- [ ] **DATA-01**: Supabase client configured with anon key for public recipe reads
-- [ ] **DATA-02**: TypeScript interfaces for Recipe, UserSession, UserInteraction, SessionState
-- [ ] **DATA-03**: Zustand store for session state (preferences, pool, card index, filters)
-- [ ] **DATA-04**: Zustand persist middleware syncs session state to localStorage
+- [x] **DATA-01**: Supabase client configured with anon key for public recipe reads
+- [x] **DATA-02**: TypeScript interfaces for Recipe, UserSession, UserInteraction, SessionState
+- [x] **DATA-03**: Zustand store for session state (preferences, pool, card index, filters)
+- [x] **DATA-04**: Zustand persist middleware syncs session state to localStorage
 
 ### Onboarding
 
@@ -141,10 +141,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | FOUN-02 | Phase 1 | Complete |
 | FOUN-03 | Phase 1 | Complete |
 | FOUN-04 | Phase 1 | Complete |
-| DATA-01 | Phase 2 | Pending |
-| DATA-02 | Phase 2 | Pending |
-| DATA-03 | Phase 2 | Pending |
-| DATA-04 | Phase 2 | Pending |
+| DATA-01 | Phase 2 | Complete |
+| DATA-02 | Phase 2 | Complete |
+| DATA-03 | Phase 2 | Complete |
+| DATA-04 | Phase 2 | Complete |
 | ONBR-01 | Phase 3 | Pending |
 | ONBR-02 | Phase 3 | Pending |
 | ONBR-03 | Phase 3 | Pending |

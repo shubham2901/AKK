@@ -57,7 +57,7 @@ A couple opens the app and leaves with a recipe they want to cook tonight — in
 
 ## Constraints
 
-- **Tech stack**: Next.js 14 App Router, Tailwind CSS, Framer Motion, Zustand, Supabase — no Streamlit, no Expo Go, no old/non-scalable tech
+- **Tech stack**: Next.js 15 App Router, Tailwind CSS v4, Motion (framer-motion), Zustand, Supabase — no Streamlit, no Expo Go, no old/non-scalable tech
 - **Font**: Syne for headings (not Clash Display), Plus Jakarta Sans for body
 - **Vibe-coding**: libraries must be well-documented, widely used, and manageable by AI coding agents
 - **No SSR dependency**: client-side rendering with smooth experience, no white flashes or loading jank
@@ -70,8 +70,8 @@ A couple opens the app and leaves with a recipe they want to cook tonight — in
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
 | Syne over Clash Display | Syne is free (Google Fonts), similar bold editorial feel | — Pending |
-| No SSR for discovery | Discovery loop is fully client-side; recipe pool fetched once, filtered/randomized on client | — Pending |
-| Framer Motion for swipe | Best-documented gesture library for React; "snap and pop" spring physics | — Pending |
+| No SSR for discovery | Discovery loop is fully client-side; recipe pool fetched with server-side filters, randomized on client | — Pending |
+| Motion for swipe | Best-documented gesture library for React; "snap and pop" spring physics | — Pending |
 | Recipe detail as overlay not route | Preserves card position in discovery loop; feels like bottom sheet per PRD | — Pending |
 | Anonymous sessions (localStorage) | No auth complexity for V0; UUID generated client-side | — Pending |
 | Non-Veg = meat + fish + egg only | User requirement; Vegetarian/Vegan show only those tagged recipes | — Pending |

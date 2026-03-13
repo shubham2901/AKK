@@ -11,7 +11,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
 - [x] **Phase 1: Foundation** - App shell, fonts, design tokens, mobile-first layout (completed 2026-03-13)
-- [ ] **Phase 2: Data Layer** - Supabase client, types, Zustand store with persist
+- [x] **Phase 2: Data Layer** - Supabase client, types, Zustand store with persist (completed 2026-03-13)
 - [ ] **Phase 3: Onboarding** - Diet preference and cuisine blocklist (first launch only)
 - [ ] **Phase 4: Session Setup** - Cuisine pick and optional ingredient filter per session
 - [ ] **Phase 5: Recipe Pool** - Fetch, filter, randomize; min 5 recipes, survives refresh
@@ -46,7 +46,7 @@ Plans:
   2. TypeScript interfaces exist for Recipe, UserSession, UserInteraction, SessionState
   3. Zustand store holds session state (preferences, pool, card index, filters)
   4. Store state persists to localStorage across page refresh
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [ ] 02-01-PLAN.md — Supabase client, types, interaction logger
@@ -162,7 +162,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-13 |
-| 2. Data Layer | 0/TBD | Not started | - |
+| 2. Data Layer | 2/2 | Complete   | 2026-03-13 |
 | 3. Onboarding | 0/TBD | Not started | - |
 | 4. Session Setup | 0/TBD | Not started | - |
 | 5. Recipe Pool | 0/TBD | Not started | - |
