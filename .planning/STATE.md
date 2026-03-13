@@ -74,5 +74,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Phase 7 context gathered
-Resume file: .planning/phases/07-recipe-detail-signal-logging/07-CONTEXT.md
+Stopped at: Phase 7 planned (3 plans, 3 waves)
+Resume file: .planning/phases/07-recipe-detail-signal-logging/07-01-PLAN.md
