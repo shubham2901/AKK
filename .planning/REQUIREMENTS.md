@@ -47,8 +47,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **DISC-01**: Full-screen recipe card with food photo, recipe name (Syne), cuisine/diet chips, one-line hook
 - [x] **DISC-02**: Swipe right/up for next card, swipe left/down for previous card
-- [ ] **DISC-03**: Tap anywhere on card opens Recipe Detail overlay
-- [ ] **DISC-04**: Shuffle button (top right) re-randomizes pool and resets position to 0
+- [x] **DISC-03**: Tap anywhere on card opens Recipe Detail overlay
+- [x] **DISC-04**: Shuffle button (top right) re-randomizes pool and resets position to 0
 - [x] **DISC-05**: Card swipe uses spring physics (snap and pop, physical movement off screen)
 - [x] **DISC-06**: Discovery card layout matches immersive design mockup (full-bleed photo, dark gradient, white text)
 - [x] **DISC-07**: Filter bar at bottom with cuisine / meal type / ingredient bottom sheet filters
@@ -160,8 +160,8 @@ Deferred to future release. Tracked but not in current roadmap.
 | POOL-04 | Phase 5 | Complete |
 | DISC-01 | Phase 6 | Complete |
 | DISC-02 | Phase 6 | Complete |
-| DISC-03 | Phase 6 | Pending |
-| DISC-04 | Phase 6 | Pending |
+| DISC-03 | Phase 6 | Complete |
+| DISC-04 | Phase 6 | Complete |
 | DISC-05 | Phase 6 | Complete |
 | DISC-06 | Phase 6 | Complete |
 | DISC-07 | Phase 6 | Complete |
