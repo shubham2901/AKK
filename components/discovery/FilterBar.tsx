@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useSessionStore } from '@/stores/session-store'
+import { logInteraction } from '@/services/interaction-logger'
 import FilterBottomSheet from './FilterBottomSheet'
 import type { Recipe } from '@/lib/types/database.types'
 
@@ -11,6 +12,7 @@ interface FilterBarProps {
 
 export default function FilterBar({ pool }: FilterBarProps) {
   const [filterOpen, setFilterOpen] = useState(false)
+  const sessionId = useSessionStore((s) => s.sessionId)
   const shufflePool = useSessionStore((s) => s.shufflePool)
   const cuisineFilter = useSessionStore((s) => s.session.cuisineFilter)
   const mealTypeFilter = useSessionStore((s) => s.session.mealTypeFilter)
@@ -32,7 +34,10 @@ export default function FilterBar({ pool }: FilterBarProps) {
           </button>
           <button
             type="button"
-            onClick={() => shufflePool()}
+            onClick={() => {
+              logInteraction(sessionId, 'shuffle')
+              shufflePool()
+            }}
             className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-charcoal bg-charcoal/10 text-charcoal hover:bg-charcoal/20 transition-colors"
             aria-label="Shuffle recipes"
           >

@@ -3,6 +3,7 @@
 import { useMemo, useEffect, useState } from 'react'
 import { motion, AnimatePresence, useMotionValue, animate } from 'motion/react'
 import { useSessionStore, filterPool } from '@/stores/session-store'
+import { logInteraction } from '@/services/interaction-logger'
 import { DiscoveryCard } from './DiscoveryCard'
 import type { Recipe } from '@/lib/types/database.types'
 
@@ -17,6 +18,7 @@ export interface DiscoveryCardStackProps {
 }
 
 export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
+  const sessionId = useSessionStore((s) => s.sessionId)
   const pool = useSessionStore((s) => s.session.pool)
   const cuisineFilter = useSessionStore((s) => s.session.cuisineFilter)
   const mealTypeFilter = useSessionStore((s) => s.session.mealTypeFilter)
@@ -86,8 +88,10 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
 
     if (dominantHorizontal) {
       const exitX = offset.x > 0 ? EXIT_DISTANCE : -EXIT_DISTANCE
+      const isNext = offset.x > 0
       animate(x, exitX, COMMIT_SPRING).then(() => {
-        if (offset.x > 0) {
+        logInteraction(sessionId, isNext ? 'swipe_next' : 'swipe_prev', currentRecipe?.id)
+        if (isNext) {
           nextCard(filteredPool.length)
         } else {
           prevCard(filteredPool.length)
@@ -98,8 +102,10 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
       animate(y, 0, SNAP_SPRING)
     } else {
       const exitY = offset.y < 0 ? -EXIT_DISTANCE : EXIT_DISTANCE
+      const isNext = offset.y < 0
       animate(y, exitY, COMMIT_SPRING).then(() => {
-        if (offset.y < 0) {
+        logInteraction(sessionId, isNext ? 'swipe_next' : 'swipe_prev', currentRecipe?.id)
+        if (isNext) {
           nextCard(filteredPool.length)
         } else {
           prevCard(filteredPool.length)
@@ -138,7 +144,10 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
           >
             <DiscoveryCard
               recipe={currentRecipe}
-              onTap={() => onCardTap?.(currentRecipe)}
+              onTap={() => {
+                logInteraction(sessionId, 'tap', currentRecipe.id)
+                onCardTap?.(currentRecipe)
+              }}
             />
           </motion.div>
         )}
