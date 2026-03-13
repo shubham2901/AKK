@@ -174,5 +174,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 5. Recipe Pool | 1/1 | Complete    | 2026-03-13 |
 | 6. Discovery Loop | 3/3 | Complete   | 2026-03-13 |
 | 7. Recipe Detail + Signal Logging | 3/3 | Complete | 2026-03-13 |
-| 8. Session Management + Success Inference | 2/2 | Complete   | 2026-03-13 |
+| 8. Session Management + Success Inference | 2/2 | Complete    | 2026-03-13 |
 | 9. Polish | 0/TBD | Not started | - |

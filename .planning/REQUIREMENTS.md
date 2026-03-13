@@ -79,8 +79,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Success Inference
 
-- [ ] **SINF-01**: When user opens YouTube link, timestamp recorded in localStorage
-- [ ] **SINF-02**: On next app open, if >2 hours since youtube_open, log session_success_inferred for that recipe
+- [x] **SINF-01**: When user opens YouTube link, timestamp recorded in localStorage
+- [x] **SINF-02**: On next app open, if >2 hours since youtube_open, log session_success_inferred for that recipe
 
 ### Settings
 
@@ -180,8 +180,8 @@ Deferred to future release. Tracked but not in current roadmap.
 | SMGM-02 | Phase 8 | Complete |
 | SMGM-03 | Phase 8 | Complete |
 | SMGM-04 | Phase 8 | Complete |
-| SINF-01 | Phase 8 | Pending |
-| SINF-02 | Phase 8 | Pending |
+| SINF-01 | Phase 8 | Complete |
+| SINF-02 | Phase 8 | Complete |
 | SETT-01 | Phase 9 | Pending |
 | SETT-02 | Phase 9 | Pending |
 | SETT-03 | Phase 9 | Pending |
