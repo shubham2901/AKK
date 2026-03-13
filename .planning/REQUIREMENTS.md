@@ -51,7 +51,7 @@ Requirements for initial release. Each maps to roadmap phases.
 - [ ] **DISC-04**: Shuffle button (top right) re-randomizes pool and resets position to 0
 - [ ] **DISC-05**: Card swipe uses spring physics (snap and pop, physical movement off screen)
 - [ ] **DISC-06**: Discovery card layout matches immersive design mockup (full-bleed photo, dark gradient, white text)
-- [ ] **DISC-07**: Filter bar at bottom with cuisine / meal type / ingredient bottom sheet filters
+- [x] **DISC-07**: Filter bar at bottom with cuisine / meal type / ingredient bottom sheet filters
 
 ### Recipe Detail
 
@@ -164,7 +164,7 @@ Deferred to future release. Tracked but not in current roadmap.
 | DISC-04 | Phase 6 | Pending |
 | DISC-05 | Phase 6 | Pending |
 | DISC-06 | Phase 6 | Pending |
-| DISC-07 | Phase 6 | Pending |
+| DISC-07 | Phase 6 | Complete |
 | DETL-01 | Phase 7 | Pending |
 | DETL-02 | Phase 7 | Pending |
 | DETL-03 | Phase 7 | Pending |

@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
-**Current focus:** Phase 5 — Recipe Pool (Complete)
+**Current focus:** Phase 6 — Discovery Loop (In Progress)
 
 ## Current Position
 
-Phase: 5 of 9 (Recipe Pool)
-Plan: 1 of 1 in current phase
-Status: Complete — 05-01 complete
-Last activity: 2026-03-13 — Completed 05-01-PLAN.md
+Phase: 6 of 9 (Discovery Loop)
+Plan: 1 of 3 in current phase
+Status: In Progress — 06-01 complete
+Last activity: 2026-03-13 — Completed 06-01-PLAN.md
 
-Progress: [████████░░] 78%
+Progress: [████████░░] 80%
 
 ## Performance Metrics
 
@@ -37,6 +37,7 @@ Progress: [████████░░] 78%
 | Phase 03-onboarding P02 | 6 | 3 tasks | 2 files |
 | Phase 04-session-setup P01 | 1min | 3 tasks | 2 files |
 | Phase 05-recipe-pool P01 | 2min | 3 tasks | 3 files |
+| Phase 06-discovery-loop P01 | 5min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -58,6 +59,7 @@ Recent decisions affecting current work:
 - [Phase 03-onboarding]: Skip saves empty blocklist (not null) — intentional so we know user made a choice
 - [Phase 05-recipe-pool]: Diet filter only in V0; blocklist/cuisine/ingredient deferred to Phase 6
 - [Phase 05-recipe-pool]: startSession preserves pool to avoid race when fetch completes before greeting ends
+- [Phase 06-discovery-loop]: Ingredient filter deferred per CONTEXT; cuisine + meal type only for filter bar foundation
 
 ### Pending Todos
 
@@ -70,5 +72,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Completed 05-01-PLAN.md
+Stopped at: Completed 06-01-PLAN.md
 Resume file: None
