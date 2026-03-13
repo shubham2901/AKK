@@ -9,8 +9,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Foundation
 
-- [ ] **FOUN-01**: App loads on mobile Chrome/Safari with no white flash or layout jank
-- [ ] **FOUN-02**: Syne (headings) and Plus Jakarta Sans (body) load without FOUC via next/font
+- [x] **FOUN-01**: App loads on mobile Chrome/Safari with no white flash or layout jank
+- [x] **FOUN-02**: Syne (headings) and Plus Jakarta Sans (body) load without FOUC via next/font
 - [ ] **FOUN-03**: Design system tokens (colors, borders, radius, shadows) applied globally via Tailwind config
 - [ ] **FOUN-04**: Mobile-first layout with max-w-md container, touch-friendly targets (min 44px)
 
@@ -137,8 +137,8 @@ Deferred to future release. Tracked but not in current roadmap.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUN-01 | Phase 1 | Pending |
-| FOUN-02 | Phase 1 | Pending |
+| FOUN-01 | Phase 1 | Complete |
+| FOUN-02 | Phase 1 | Complete |
 | FOUN-03 | Phase 1 | Pending |
 | FOUN-04 | Phase 1 | Pending |
 | DATA-01 | Phase 2 | Pending |
