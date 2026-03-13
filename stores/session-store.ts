@@ -174,23 +174,18 @@ export const useSessionStore = create<
         })),
 
       startSession: (cuisines, ingredientFilter) =>
-        set((s) => {
-          const sessionId =
-            s.sessionId.length >= 8 ? s.sessionId : crypto.randomUUID()
-          return {
-            ...(s.sessionId.length < 8 && { sessionId }),
-            session: {
-              cuisines,
-              ingredientFilter,
-              cuisineFilter: [],
-              mealTypeFilter: [],
-              pool: s.session.pool,
-              currentIndex: 0,
-              lastActiveAt: Date.now(),
-              setupComplete: true,
-            },
-          }
-        }),
+        set((s) => ({
+          session: {
+            cuisines,
+            ingredientFilter,
+            cuisineFilter: [],
+            mealTypeFilter: [],
+            pool: s.session.pool,
+            currentIndex: 0,
+            lastActiveAt: Date.now(),
+            setupComplete: true,
+          },
+        })),
 
       setPool: (recipes) =>
         set((s) => ({
@@ -270,7 +265,14 @@ export const useSessionStore = create<
         }
       },
       onRehydrateStorage: () => (state) => {
-        state?._setHasHydrated(true)
+        if (state) {
+          state._setHasHydrated(true)
+          if (state.sessionId.length < 8) {
+            const newId = crypto.randomUUID()
+            state.setSessionId(newId)
+            // Sync will happen when useSessionLifecycle mounts (Plan 08-02)
+          }
+        }
       },
     },
   ),
