@@ -49,6 +49,8 @@ interface SessionActions {
   touchActivity: () => void
 
   setSessionId: (id: string) => void
+  togglePick: (recipeId: string) => void
+  recordViewed: (recipeId: string) => void
 
   _hasHydrated: boolean
   _setHasHydrated: (v: boolean) => void
@@ -77,8 +79,8 @@ const initialSession: Session = {
 
 export function filterPool(
   pool: Recipe[],
-  cuisineFilter: string[],
-  mealTypeFilter: string[],
+  cuisineFilter: string[] = [],
+  mealTypeFilter: string[] = [],
 ): Recipe[] {
   return pool.filter((r) => {
     const matchCuisine =
@@ -105,18 +107,40 @@ export function shuffleArray<T>(arr: T[]): T[] {
 // ─── Store ───
 
 export const useSessionStore = create<
-  { sessionId: string; preferences: Preferences; session: Session } & SessionActions
+  {
+    sessionId: string
+    preferences: Preferences
+    session: Session
+    pickedIds: string[]
+    viewedIds: string[]
+  } & SessionActions
 >()(
   persist(
     (set, get) => ({
       sessionId: '',
       preferences: { ...initialPreferences },
       session: { ...initialSession },
+      pickedIds: [],
+      viewedIds: [],
 
       _hasHydrated: false,
       _setHasHydrated: (v) => set({ _hasHydrated: v }),
 
       setSessionId: (id) => set({ sessionId: id }),
+
+      togglePick: (recipeId) =>
+        set((s) => ({
+          pickedIds: s.pickedIds.includes(recipeId)
+            ? s.pickedIds.filter((id) => id !== recipeId)
+            : [...s.pickedIds, recipeId],
+        })),
+
+      recordViewed: (recipeId) =>
+        set((s) => ({
+          viewedIds: s.viewedIds.includes(recipeId)
+            ? s.viewedIds
+            : [...s.viewedIds, recipeId],
+        })),
 
       setDiet: (diet) =>
         set((s) => ({
@@ -134,18 +158,23 @@ export const useSessionStore = create<
         })),
 
       startSession: (cuisines, ingredientFilter) =>
-        set((s) => ({
-          session: {
-            cuisines,
-            ingredientFilter,
-            cuisineFilter: [],
-            mealTypeFilter: [],
-            pool: s.session.pool,
-            currentIndex: 0,
-            lastActiveAt: Date.now(),
-            setupComplete: true,
-          },
-        })),
+        set((s) => {
+          const sessionId =
+            s.sessionId.length >= 8 ? s.sessionId : crypto.randomUUID()
+          return {
+            ...(s.sessionId.length < 8 && { sessionId }),
+            session: {
+              cuisines,
+              ingredientFilter,
+              cuisineFilter: [],
+              mealTypeFilter: [],
+              pool: s.session.pool,
+              currentIndex: 0,
+              lastActiveAt: Date.now(),
+              setupComplete: true,
+            },
+          }
+        }),
 
       setPool: (recipes) =>
         set((s) => ({
@@ -196,6 +225,7 @@ export const useSessionStore = create<
       resetSession: () =>
         set({
           session: { ...initialSession, lastActiveAt: Date.now() },
+          viewedIds: [],
         }),
 
       touchActivity: () =>
@@ -210,7 +240,19 @@ export const useSessionStore = create<
         sessionId: state.sessionId,
         preferences: state.preferences,
         session: state.session,
+        pickedIds: state.pickedIds,
       }),
+      merge: (persisted, current) => {
+        const p = persisted as typeof current | undefined
+        if (!p) return current
+        return {
+          ...current,
+          sessionId: p.sessionId ?? current.sessionId,
+          preferences: { ...current.preferences, ...p.preferences },
+          session: { ...current.session, ...p.session },
+          pickedIds: p.pickedIds ?? current.pickedIds,
+        }
+      },
       onRehydrateStorage: () => (state) => {
         state?._setHasHydrated(true)
       },
