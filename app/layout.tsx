@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Syne, Plus_Jakarta_Sans } from "next/font/google";
+import { Sour_Gummy, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const syne = Syne({
+const sourGummy = Sour_Gummy({
   weight: ["400", "800"],
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-sour-gummy",
   display: "swap",
 });
 
@@ -32,8 +32,14 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${syne.variable} ${plusJakarta.variable}`}
+      className={`${sourGummy.variable} ${plusJakarta.variable}`}
     >
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body
         className={`${plusJakarta.className} antialiased`}
         style={{ backgroundColor: "#FFF9F5" }}
