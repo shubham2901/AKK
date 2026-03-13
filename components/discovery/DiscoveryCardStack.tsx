@@ -19,6 +19,8 @@ export interface DiscoveryCardStackProps {
 
 export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
   const sessionId = useSessionStore((s) => s.sessionId)
+  const pickedIds = useSessionStore((s) => s.pickedIds)
+  const viewedIds = useSessionStore((s) => s.viewedIds)
   const pool = useSessionStore((s) => s.session.pool)
   const cuisineFilter = useSessionStore((s) => s.session.cuisineFilter)
   const mealTypeFilter = useSessionStore((s) => s.session.mealTypeFilter)
@@ -144,6 +146,8 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
           >
             <DiscoveryCard
               recipe={currentRecipe}
+              isPicked={pickedIds.includes(currentRecipe.id)}
+              isViewed={viewedIds.includes(currentRecipe.id)}
               onTap={() => {
                 logInteraction(sessionId, 'tap', currentRecipe.id)
                 onCardTap?.(currentRecipe)

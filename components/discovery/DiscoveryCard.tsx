@@ -5,10 +5,12 @@ import type { Recipe } from '@/lib/types/database.types'
 
 export interface DiscoveryCardProps {
   recipe: Recipe
+  isPicked?: boolean
+  isViewed?: boolean
   onTap?: () => void
 }
 
-export function DiscoveryCard({ recipe, onTap }: DiscoveryCardProps) {
+export function DiscoveryCard({ recipe, isPicked, isViewed, onTap }: DiscoveryCardProps) {
   const name = recipe.recipe_name_english ?? recipe.title ?? 'Recipe'
   const hook = recipe.one_line_hook ?? ''
   const chips = [
@@ -23,7 +25,7 @@ export function DiscoveryCard({ recipe, onTap }: DiscoveryCardProps) {
 
   return (
     <div
-      className="relative h-full w-full overflow-hidden rounded-[var(--radius-default)] touch-none"
+      className={`relative h-full w-full overflow-hidden rounded-[var(--radius-default)] touch-none ${isViewed ? 'opacity-90' : ''}`}
       style={{ touchAction: 'none' }}
       onClick={onTap}
       role="button"
@@ -35,6 +37,12 @@ export function DiscoveryCard({ recipe, onTap }: DiscoveryCardProps) {
         }
       }}
     >
+      {/* Picked badge */}
+      {isPicked && (
+        <div className="absolute top-3 right-3 z-10 rounded-full bg-bg-light border-2 border-charcoal p-1 shadow-small">
+          <span className="material-symbols-outlined text-lg text-charcoal">check_circle</span>
+        </div>
+      )}
       {/* Full-bleed photo */}
       <div className="absolute inset-0">
         {isValidUrl ? (
