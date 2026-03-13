@@ -60,11 +60,12 @@ Plans:
   1. User sees diet selection (3 vertical cards with icons) on first launch
   2. User sees cuisine blocklist (asymmetric tag cloud with rotated chips) after diet
   3. Selections save to localStorage; onboarding flow never shown again on subsequent opens
-  4. Diet and blocklist screens match design mockups (stitch_screens/2_diet_preference.html, 1_cuisine_exclusions.html)
-**Plans**: TBD
+  4. Diet and blocklist screens match design vibe (neo-brutalist, not pixel-match)
+**Plans:** 1/2 plans complete
 
 Plans:
-- [ ] 03-01: TBD
+- [x] 03-01-PLAN.md — Install motion, Material Symbols font, diet preference screen, onboarding gate in page.tsx
+- [ ] 03-02-PLAN.md — Cuisine blocklist screen with rotated chip cloud, wire into flow, complete onboarding
 
 ### Phase 4: Session Setup
 **Goal**: User picks 1-3 cuisines and optional ingredient for this session; session starts immediately
@@ -163,7 +164,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 |-------|----------------|--------|-----------|
 | 1. Foundation | 2/2 | Complete    | 2026-03-13 |
 | 2. Data Layer | 2/2 | Complete   | 2026-03-13 |
-| 3. Onboarding | 0/TBD | Not started | - |
+| 3. Onboarding | 0/2 | Planned | - |
 | 4. Session Setup | 0/TBD | Not started | - |
 | 5. Recipe Pool | 0/TBD | Not started | - |
 | 6. Discovery Loop | 0/TBD | Not started | - |

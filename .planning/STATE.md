@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
-**Current focus:** Phase 2 — Data Layer (Complete)
+**Current focus:** Phase 3 — Onboarding (Planned, ready for execution)
 
 ## Current Position
 
-Phase: 2 of 9 (Data Layer)
-Plan: 2 of 2 in current phase (Phase 2 complete)
-Status: Complete
-Last activity: 2026-03-13 — Completed 02-02-PLAN.md
+Phase: 3 of 9 (Onboarding)
+Plan: 1 of 2 in current phase
+Status: In progress — 03-01 complete
+Last activity: 2026-03-13 — Completed Phase 3 discuss + planning
 
-Progress: [██████████] 100%
+Progress: [████░░░░░░] 40%
 
 ## Performance Metrics
 
@@ -47,6 +47,10 @@ Recent decisions affecting current work:
 - metadata typed as Record<string, Json> to match Supabase type system
 - onRehydrateStorage for hydration gate (simpler than skipHydration + manual rehydrate)
 - Full Recipe objects persisted in pool for V0 (per discuss-phase decision)
+- State-based onboarding gate, not route-based (per discuss-phase 3)
+- Keep Sour Gummy heading font; font defined in one CSS variable for easy swap
+- Hardcoded curated cuisine list (~15), niche regionals grouped under broader labels
+- Mockups are reference for vibe, not pixel-spec
 
 ### Pending Todos
 
@@ -59,5 +63,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-03-13
-Stopped at: Completed 02-02-PLAN.md
+Stopped at: Completed 03-01-PLAN.md
 Resume file: None

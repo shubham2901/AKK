@@ -23,10 +23,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Onboarding
 
-- [ ] **ONBR-01**: User can select diet preference (Vegetarian / Non-Veg / Vegan) on first launch
+- [x] **ONBR-01**: User can select diet preference (Vegetarian / Non-Veg / Vegan) on first launch
 - [ ] **ONBR-02**: User can select cuisine blocklist (multi-select chips) on first launch
 - [ ] **ONBR-03**: Onboarding data saved to localStorage and never shown again
-- [ ] **ONBR-04**: Diet screen shows 3 vertical cards with icons per design mockup
+- [x] **ONBR-04**: Diet screen shows 3 vertical cards with icons per design mockup
 - [ ] **ONBR-05**: Blocklist screen shows asymmetric tag cloud with rotated chips per design mockup
 
 ### Session Setup
@@ -145,10 +145,10 @@ Deferred to future release. Tracked but not in current roadmap.
 | DATA-02 | Phase 2 | Complete |
 | DATA-03 | Phase 2 | Complete |
 | DATA-04 | Phase 2 | Complete |
-| ONBR-01 | Phase 3 | Pending |
+| ONBR-01 | Phase 3 | Complete |
 | ONBR-02 | Phase 3 | Pending |
 | ONBR-03 | Phase 3 | Pending |
-| ONBR-04 | Phase 3 | Pending |
+| ONBR-04 | Phase 3 | Complete |
 | ONBR-05 | Phase 3 | Pending |
 | SESS-01 | Phase 4 | Pending |
 | SESS-02 | Phase 4 | Pending |
