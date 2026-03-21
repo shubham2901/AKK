@@ -84,17 +84,17 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Settings
 
-- [ ] **SETT-01**: Settings page accessible from discovery screen
-- [ ] **SETT-02**: User can edit diet preference
-- [ ] **SETT-03**: User can edit cuisine blocklist
-- [ ] **SETT-04**: Changes apply immediately and trigger pool rebuild on next session
+- [x] **SETT-01**: Settings page accessible from discovery screen
+- [x] **SETT-02**: User can edit diet preference
+- [x] **SETT-03**: User can edit cuisine blocklist
+- [x] **SETT-04**: Changes apply immediately and trigger pool rebuild on next session
 
 ### Empty State
 
-- [ ] **EMPT-01**: Empty state shown when pool has fewer than 5 recipes after filtering
-- [ ] **EMPT-02**: Shows blob illustration, "Hmm. Nothing here." text per design mockup
-- [ ] **EMPT-03**: "Reset filters" button clears session filters
-- [ ] **EMPT-04**: "Shuffle anyway" button re-randomizes with current filters
+- [x] **EMPT-01**: Empty state shown when pool has fewer than 5 recipes after filtering
+- [x] **EMPT-02**: Shows blob illustration, "Hmm. Nothing here." text per design mockup
+- [x] **EMPT-03**: "Reset filters" button clears session filters
+- [x] **EMPT-04**: "Shuffle anyway" button re-randomizes with current filters
 
 ## v2 Requirements
 
@@ -182,14 +182,14 @@ Deferred to future release. Tracked but not in current roadmap.
 | SMGM-04 | Phase 8 | Complete |
 | SINF-01 | Phase 8 | Complete |
 | SINF-02 | Phase 8 | Complete |
-| SETT-01 | Phase 9 | Pending |
-| SETT-02 | Phase 9 | Pending |
-| SETT-03 | Phase 9 | Pending |
-| SETT-04 | Phase 9 | Pending |
-| EMPT-01 | Phase 9 | Pending |
-| EMPT-02 | Phase 9 | Pending |
-| EMPT-03 | Phase 9 | Pending |
-| EMPT-04 | Phase 9 | Pending |
+| SETT-01 | Phase 9 | Complete |
+| SETT-02 | Phase 9 | Complete |
+| SETT-03 | Phase 9 | Complete |
+| SETT-04 | Phase 9 | Complete |
+| EMPT-01 | Phase 9 | Complete |
+| EMPT-02 | Phase 9 | Complete |
+| EMPT-03 | Phase 9 | Complete |
+| EMPT-04 | Phase 9 | Complete |
 
 **Coverage:**
 - v1 requirements: 49 total

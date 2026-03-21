@@ -3,32 +3,7 @@
 import { useState, useCallback } from 'react'
 import { motion } from 'motion/react'
 import { useSessionStore } from '@/stores/session-store'
-
-const CUISINES = [
-  'North Indian',
-  'South Indian',
-  'Punjabi',
-  'Gujarati',
-  'Rajasthani',
-  'Bengali',
-  'Maharashtrian',
-  'Kerala',
-  'Hyderabadi',
-  'Mughlai',
-  'Chinese',
-  'Indo-Chinese',
-  'Italian',
-  'Street Food',
-  'Fusion',
-] as const
-
-const ROTATIONS = [
-  'rotate-[2deg]',
-  '-rotate-[1.5deg]',
-  'rotate-[3deg]',
-  '-rotate-[2.5deg]',
-  'rotate-[1deg]',
-]
+import { BLOCKLIST_CHIP_ROTATIONS, CUISINES } from '@/lib/constants/cuisines'
 
 interface BlocklistStepProps {
   onComplete: () => void
@@ -96,7 +71,8 @@ export default function BlocklistStep({ onComplete, onBack }: BlocklistStepProps
       <div className="flex flex-wrap gap-3 items-start content-start flex-1 mt-8 mb-24">
         {CUISINES.map((cuisine, index) => {
           const isSelected = selected.has(cuisine)
-          const rotationClass = ROTATIONS[index % ROTATIONS.length]
+          const rotationClass =
+            BLOCKLIST_CHIP_ROTATIONS[index % BLOCKLIST_CHIP_ROTATIONS.length]
           return (
             <motion.button
               key={cuisine}

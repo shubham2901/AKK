@@ -44,6 +44,7 @@ interface SessionActions {
   prevCard: (effectiveLen?: number) => void
   setCuisineFilter: (f: string[]) => void
   setMealTypeFilter: (f: string[]) => void
+  clearSessionFilters: () => void
   shufflePool: () => void
   resetSession: () => void
   touchActivity: () => void
@@ -221,6 +222,18 @@ export const useSessionStore = create<
       setMealTypeFilter: (f) =>
         set((s) => ({
           session: { ...s.session, mealTypeFilter: f, currentIndex: 0, lastActiveAt: Date.now() },
+        })),
+
+      clearSessionFilters: () =>
+        set((s) => ({
+          session: {
+            ...s.session,
+            cuisineFilter: [],
+            mealTypeFilter: [],
+            ingredientFilter: null,
+            currentIndex: 0,
+            lastActiveAt: Date.now(),
+          },
         })),
 
       shufflePool: () =>
