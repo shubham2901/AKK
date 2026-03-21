@@ -18,7 +18,7 @@ From a greenfield Next.js app to a working recipe discovery experience: foundati
 - [x] **Phase 6: Discovery Loop** - Full-screen cards, swipe navigation, filter bar, shuffle (completed 2026-03-13)
 - [x] **Phase 7: Recipe Detail + Signal Logging** - Overlay, YouTube/web links, Found my pick, fire-and-forget logging (completed 2026-03-13)
 - [x] **Phase 8: Session Management + Success Inference** - Anonymous sessions, 4hr timeout, success inference (completed 2026-03-13)
-- [ ] **Phase 9: Polish** - Empty state, settings page, reset/shuffle
+- [ ] **Phase 9: Polish** - Empty state, settings page, reset/shuffle (in progress)
 
 ## Phase Details
 
@@ -155,10 +155,11 @@ Plans:
   2. Empty state shows blob illustration, "Hmm. Nothing here." per design mockup (stitch_screens/6_empty_state.html)
   3. "Reset filters" clears session filters; "Shuffle anyway" re-randomizes with current filters
   4. Settings page accessible from discovery; user can edit diet preference and cuisine blocklist; changes apply to next session
-**Plans**: TBD
+**Plans:** 0/2 plans complete
 
 Plans:
-- [ ] 09-01: TBD
+- [ ] 09-01-PLAN.md — Empty state + clearSessionFilters + filtered-count gate + FilterBar on empty
+- [ ] 09-02-PLAN.md — Settings screen + blocklist filter + pool rebuild on back
 
 ## Progress
 
@@ -175,4 +176,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8 →
 | 6. Discovery Loop | 3/3 | Complete   | 2026-03-13 |
 | 7. Recipe Detail + Signal Logging | 3/3 | Complete | 2026-03-13 |
 | 8. Session Management + Success Inference | 2/2 | Complete    | 2026-03-13 |
-| 9. Polish | 0/TBD | Not started | - |
+| 9. Polish | 0/2 | Planned | - |

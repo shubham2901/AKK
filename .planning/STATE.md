@@ -5,14 +5,14 @@
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
-**Current focus:** Phase 9 — Polish (context gathered; ready to plan)
+**Current focus:** Phase 9 — Polish (planned; ready to execute)
 
 ## Current Position
 
 Phase: 9 of 9 (Polish)
-Plan: 0 of TBD in current phase
-Status: Context complete — ready for `/gsd:plan-phase 9`
-Last activity: 2026-03-13 — Captured 09-CONTEXT.md (empty state + settings decisions)
+Plan: 0 of 2 in current phase
+Status: Planned — 09-RESEARCH.md + 09-01 / 09-02 plans written
+Last activity: 2026-03-13 — `/gsd:plan-phase 9`
 
 Progress: [█████████░] 90%
 
@@ -88,4 +88,4 @@ None yet.
 
 Last session: 2026-03-13
 Stopped at: Completed 08-02-PLAN.md
-Resume file: .planning/phases/09-polish/09-CONTEXT.md
+Resume file: .planning/phases/09-polish/09-01-PLAN.md
