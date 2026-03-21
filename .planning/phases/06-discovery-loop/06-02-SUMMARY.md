@@ -66,7 +66,7 @@ Each task was committed atomically:
 1. **Task 1: DiscoveryCard component** - `d15b949` (feat)
 2. **Task 2: DiscoveryCardStack with swipe and spring physics** - `0aa2873` (feat)
 
-**Plan metadata:** `111cd8c` (docs: complete plan)
+**Plan metadata:** `279dc92` (docs: complete plan)
 
 _Note: Session store (loop logic, filterPool, filter state) was already present from 06-01 scope; no store changes needed._
 

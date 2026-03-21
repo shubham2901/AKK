@@ -17,7 +17,7 @@ export async function fetchRecipes(diet: DietPreference | null): Promise<Recipe[
   }
   // diet === null → no filter (fetch all)
 
-  const { data, error } = await query
+  const { data, error } = await query.limit(50)
   if (error) throw error
   return (data ?? []) as Recipe[]
 }

@@ -19,7 +19,7 @@
   --radius-full: 9999px;
 
   /* Fonts (reference next/font CSS vars from layout) */
-  --font-heading: var(--font-syne), ui-sans-serif, sans-serif;
+  --font-heading: var(--font-sour-gummy), ui-sans-serif, sans-serif;
   --font-sans: var(--font-body), ui-sans-serif, sans-serif;
 }
 
