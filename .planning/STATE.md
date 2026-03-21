@@ -5,16 +5,16 @@
 See: .planning/PROJECT.md (updated 2026-03-13)
 
 **Core value:** A couple opens the app and leaves with a recipe they want to cook tonight — in under 2 minutes, with zero decision fatigue.
-**Current focus:** Phase 8 — Session Management + Success Inference
+**Current focus:** Phase 9 — Polish (context gathered; ready to plan)
 
 ## Current Position
 
-Phase: 8 of 9 (Session Management + Success Inference)
-Plan: 2 of 2 in current phase
-Status: Complete — Phase 8 done
-Last activity: 2026-03-13 — Completed 08-02-PLAN.md
+Phase: 9 of 9 (Polish)
+Plan: 0 of TBD in current phase
+Status: Context complete — ready for `/gsd:plan-phase 9`
+Last activity: 2026-03-13 — Captured 09-CONTEXT.md (empty state + settings decisions)
 
-Progress: [██████████] 100%
+Progress: [█████████░] 90%
 
 ## Performance Metrics
 
@@ -74,6 +74,7 @@ Recent decisions affecting current work:
 - [Phase 08-session-management-success-inference]: rotateSession preserves pool (reshuffled), filters, pickedIds; clears viewedIds
 - [Phase 08-02]: Initial session sync via useState(synced) in page.tsx after hydration
 - [Phase 08-02]: Success inference: >2hr since youtube_open → log session_success_inferred, clear record
+- [Phase 09-polish]: Empty state per `stitch_screens/6_empty_state.html`; Reset filters = session filters only; Shuffle anyway = reshuffle current pool; Settings full-screen from discovery (gear); diet/blocklist saved immediately, pool rebuild on back to discovery
 
 ### Pending Todos
 
@@ -87,4 +88,4 @@ None yet.
 
 Last session: 2026-03-13
 Stopped at: Completed 08-02-PLAN.md
-Resume file: .planning/phases/09-polish (next phase)
+Resume file: .planning/phases/09-polish/09-CONTEXT.md
