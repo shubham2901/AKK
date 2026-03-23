@@ -2,11 +2,11 @@ const STORAGE_KEY = 'akk-last-youtube'
 
 interface YoutubeOpenRecord {
   sessionId: string
-  recipeId: string
+  recipeId: number
   timestamp: number
 }
 
-export function saveYoutubeOpen(sessionId: string, recipeId: string): void {
+export function saveYoutubeOpen(sessionId: string, recipeId: number): void {
   try {
     const record: YoutubeOpenRecord = {
       sessionId,

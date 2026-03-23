@@ -26,6 +26,7 @@ export default function Home() {
   const pool = useSessionStore((s) => s.session.pool)
   const cuisineFilter = useSessionStore((s) => s.session.cuisineFilter)
   const mealTypeFilter = useSessionStore((s) => s.session.mealTypeFilter)
+  const recipeTypeFilter = useSessionStore((s) => s.session.recipeTypeFilter)
   const recordViewed = useSessionStore((s) => s.recordViewed)
 
   useSessionLifecycle()
@@ -37,8 +38,8 @@ export default function Home() {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null)
 
   const filteredPool = useMemo(
-    () => filterPool(pool, cuisineFilter, mealTypeFilter),
-    [pool, cuisineFilter, mealTypeFilter],
+    () => filterPool(pool, cuisineFilter, mealTypeFilter, recipeTypeFilter),
+    [pool, cuisineFilter, mealTypeFilter, recipeTypeFilter],
   )
   const effectiveCount = filteredPool.length
 

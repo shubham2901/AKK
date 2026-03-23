@@ -44,6 +44,7 @@ interface SessionActions {
   prevCard: (effectiveLen?: number) => void
   setCuisineFilter: (f: string[]) => void
   setMealTypeFilter: (f: string[]) => void
+  setRecipeTypeFilter: (f: string[]) => void
   clearSessionFilters: () => void
   shufflePool: () => void
   resetSession: () => void
@@ -51,8 +52,8 @@ interface SessionActions {
 
   setSessionId: (id: string) => void
   rotateSession: () => string
-  togglePick: (recipeId: string) => void
-  recordViewed: (recipeId: string) => void
+  togglePick: (recipeId: number) => void
+  recordViewed: (recipeId: number) => void
 
   _hasHydrated: boolean
   _setHasHydrated: (v: boolean) => void
@@ -71,6 +72,7 @@ const initialSession: Session = {
   ingredientFilter: null,
   cuisineFilter: [],
   mealTypeFilter: [],
+  recipeTypeFilter: ['Main Course'],
   pool: [],
   currentIndex: 0,
   lastActiveAt: Date.now(),
@@ -83,15 +85,19 @@ export function filterPool(
   pool: Recipe[],
   cuisineFilter: string[] = [],
   mealTypeFilter: string[] = [],
+  recipeTypeFilter: string[] = [],
 ): Recipe[] {
   return pool.filter((r) => {
     const matchCuisine =
       cuisineFilter.length === 0 ||
-      r.cuisine_tags?.some((c) => cuisineFilter.includes(c)) === true
+      r.cuisine?.some((c) => cuisineFilter.includes(c)) === true
     const matchMeal =
       mealTypeFilter.length === 0 ||
-      r.meal_type?.some((m) => mealTypeFilter.includes(m)) === true
-    return matchCuisine && matchMeal
+      r.meal_time?.some((m) => mealTypeFilter.includes(m)) === true
+    const matchType =
+      recipeTypeFilter.length === 0 ||
+      (r.recipe_type != null && recipeTypeFilter.some((t) => r.recipe_type!.includes(t)))
+    return matchCuisine && matchMeal && matchType
   })
 }
 
@@ -113,8 +119,8 @@ export const useSessionStore = create<
     sessionId: string
     preferences: Preferences
     session: Session
-    pickedIds: string[]
-    viewedIds: string[]
+      pickedIds: number[]
+      viewedIds: number[]
   } & SessionActions
 >()(
   persist(
@@ -181,6 +187,7 @@ export const useSessionStore = create<
             ingredientFilter,
             cuisineFilter: [],
             mealTypeFilter: [],
+            recipeTypeFilter: ['Main Course'],
             pool: s.session.pool,
             currentIndex: 0,
             lastActiveAt: Date.now(),
@@ -224,12 +231,18 @@ export const useSessionStore = create<
           session: { ...s.session, mealTypeFilter: f, currentIndex: 0, lastActiveAt: Date.now() },
         })),
 
+      setRecipeTypeFilter: (f) =>
+        set((s) => ({
+          session: { ...s.session, recipeTypeFilter: f, currentIndex: 0, lastActiveAt: Date.now() },
+        })),
+
       clearSessionFilters: () =>
         set((s) => ({
           session: {
             ...s.session,
             cuisineFilter: [],
             mealTypeFilter: [],
+            recipeTypeFilter: ['Main Course'],
             ingredientFilter: null,
             currentIndex: 0,
             lastActiveAt: Date.now(),

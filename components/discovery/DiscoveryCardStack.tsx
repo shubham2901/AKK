@@ -9,8 +9,8 @@ import type { Recipe } from '@/lib/types/database.types'
 
 const SWIPE_THRESHOLD = 0.2
 const VELOCITY_THRESHOLD = 500
-const EXIT_DISTANCE = 400
-const COMMIT_SPRING = { type: 'spring' as const, stiffness: 300, damping: 30 }
+/** Snappy exit: springs with low damping stay “alive” for hundreds of ms after the finger lifts. */
+const COMMIT_EXIT = { type: 'tween' as const, duration: 0.22, ease: [0.25, 0.1, 0.25, 1] as const }
 const SNAP_SPRING = { type: 'spring' as const, stiffness: 400, damping: 40 }
 
 export interface DiscoveryCardStackProps {
@@ -24,14 +24,15 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
   const pool = useSessionStore((s) => s.session.pool)
   const cuisineFilter = useSessionStore((s) => s.session.cuisineFilter)
   const mealTypeFilter = useSessionStore((s) => s.session.mealTypeFilter)
+  const recipeTypeFilter = useSessionStore((s) => s.session.recipeTypeFilter)
   const currentIndex = useSessionStore((s) => s.session.currentIndex)
   const nextCard = useSessionStore((s) => s.nextCard)
   const prevCard = useSessionStore((s) => s.prevCard)
   const setCurrentIndex = useSessionStore((s) => s.setCurrentIndex)
 
   const filteredPool = useMemo(
-    () => filterPool(pool, cuisineFilter, mealTypeFilter),
-    [pool, cuisineFilter, mealTypeFilter],
+    () => filterPool(pool, cuisineFilter, mealTypeFilter, recipeTypeFilter),
+    [pool, cuisineFilter, mealTypeFilter, recipeTypeFilter],
   )
 
   const [dimensions, setDimensions] = useState({ width: 300, height: 500 })
@@ -89,9 +90,10 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
     }
 
     if (dominantHorizontal) {
-      const exitX = offset.x > 0 ? EXIT_DISTANCE : -EXIT_DISTANCE
+      const exitMag = dimensions.width * 1.08
+      const exitX = offset.x > 0 ? exitMag : -exitMag
       const isNext = offset.x > 0
-      animate(x, exitX, COMMIT_SPRING).then(() => {
+      animate(x, exitX, COMMIT_EXIT).then(() => {
         logInteraction(sessionId, isNext ? 'swipe_next' : 'swipe_prev', currentRecipe?.id)
         if (isNext) {
           nextCard(filteredPool.length)
@@ -103,9 +105,10 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
       })
       animate(y, 0, SNAP_SPRING)
     } else {
-      const exitY = offset.y < 0 ? -EXIT_DISTANCE : EXIT_DISTANCE
+      const exitMag = dimensions.height * 1.08
+      const exitY = offset.y < 0 ? -exitMag : exitMag
       const isNext = offset.y < 0
-      animate(y, exitY, COMMIT_SPRING).then(() => {
+      animate(y, exitY, COMMIT_EXIT).then(() => {
         logInteraction(sessionId, isNext ? 'swipe_next' : 'swipe_prev', currentRecipe?.id)
         if (isNext) {
           nextCard(filteredPool.length)

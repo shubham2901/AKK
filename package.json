@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:restart": "bash scripts/dev-restart.sh",
+    "git:push": "bash scripts/git-commit-push.sh",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"

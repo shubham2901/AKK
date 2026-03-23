@@ -13,11 +13,28 @@ interface FilterBottomSheetProps {
 export default function FilterBottomSheet({ open, onClose, pool }: FilterBottomSheetProps) {
   const cuisineFilter = useSessionStore((s) => s.session.cuisineFilter)
   const mealTypeFilter = useSessionStore((s) => s.session.mealTypeFilter)
+  const recipeTypeFilter = useSessionStore((s) => s.session.recipeTypeFilter)
   const setCuisineFilter = useSessionStore((s) => s.setCuisineFilter)
   const setMealTypeFilter = useSessionStore((s) => s.setMealTypeFilter)
+  const setRecipeTypeFilter = useSessionStore((s) => s.setRecipeTypeFilter)
 
-  const cuisineOptions = [...new Set(pool.flatMap((r) => r.cuisine_tags ?? []))].sort()
-  const mealTypeOptions = [...new Set(pool.flatMap((r) => r.meal_type ?? []))].sort()
+  const recipeTypeOptions = [...new Set(
+    pool.flatMap((r) => {
+      if (!r.recipe_type) return []
+      return r.recipe_type.includes(' | ')
+        ? r.recipe_type.split(' | ').map((t) => t.trim())
+        : [r.recipe_type.trim()]
+    })
+  )].sort()
+  const cuisineOptions = [...new Set(pool.flatMap((r) => r.cuisine ?? []))].sort()
+  const mealTypeOptions = [...new Set(pool.flatMap((r) => r.meal_time ?? []))].sort()
+
+  const toggleRecipeType = (value: string) => {
+    const next = recipeTypeFilter.includes(value)
+      ? recipeTypeFilter.filter((t) => t !== value)
+      : [...recipeTypeFilter, value]
+    setRecipeTypeFilter(next)
+  }
 
   const toggleCuisine = (value: string) => {
     const next = cuisineFilter.includes(value)
@@ -56,6 +73,35 @@ export default function FilterBottomSheet({ open, onClose, pool }: FilterBottomS
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
         <div className="p-6 pb-safe max-h-[70vh] overflow-y-auto">
+          {/* Recipe type section */}
+          <section className="mb-6">
+            <h3 className="font-heading font-bold text-sm uppercase tracking-wider text-charcoal mb-3">
+              Recipe Type
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {recipeTypeOptions.map((opt) => {
+                const isSelected = recipeTypeFilter.includes(opt)
+                return (
+                  <button
+                    key={opt}
+                    type="button"
+                    onClick={() => toggleRecipeType(opt)}
+                    className={`px-4 py-2 border-2 rounded-lg font-semibold text-sm min-h-[40px] transition-colors ${
+                      isSelected
+                        ? 'bg-primary/20 border-primary text-charcoal'
+                        : 'border-charcoal text-charcoal bg-white hover:bg-charcoal/5'
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                )
+              })}
+              {recipeTypeOptions.length === 0 && (
+                <p className="text-sm text-charcoal/60">No recipe types in pool</p>
+              )}
+            </div>
+          </section>
+
           {/* Cuisine section */}
           <section className="mb-6">
             <h3 className="font-heading font-bold text-sm uppercase tracking-wider text-charcoal mb-3">

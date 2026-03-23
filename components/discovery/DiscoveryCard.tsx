@@ -11,17 +11,17 @@ export interface DiscoveryCardProps {
 }
 
 export function DiscoveryCard({ recipe, isPicked, isViewed, onTap }: DiscoveryCardProps) {
-  const name = recipe.recipe_name_english ?? recipe.title ?? 'Recipe'
+  const name = recipe.recipe_name_english ?? 'Recipe'
   const hook = recipe.one_line_hook ?? ''
   const chips = [
-    ...(recipe.cuisine_tags ?? []).slice(0, 2),
+    ...(recipe.cuisine ?? []).slice(0, 2),
     ...(recipe.diet_tags ?? []).slice(0, 1),
   ].slice(0, 3)
 
-  const thumbnailUrl = recipe.thumbnail
+  const imageUrl = recipe.image_path || recipe.hero_image
   const isValidUrl =
-    thumbnailUrl &&
-    (thumbnailUrl.startsWith('http://') || thumbnailUrl.startsWith('https://'))
+    imageUrl &&
+    (imageUrl.startsWith('http://') || imageUrl.startsWith('https://'))
 
   return (
     <div
@@ -37,17 +37,15 @@ export function DiscoveryCard({ recipe, isPicked, isViewed, onTap }: DiscoveryCa
         }
       }}
     >
-      {/* Picked badge */}
       {isPicked && (
         <div className="absolute top-3 right-3 z-10 rounded-full bg-bg-light border-2 border-charcoal p-1 shadow-small">
           <span className="material-symbols-outlined text-lg text-charcoal">check_circle</span>
         </div>
       )}
-      {/* Full-bleed photo */}
       <div className="absolute inset-0">
         {isValidUrl ? (
           <Image
-            src={thumbnailUrl}
+            src={imageUrl}
             alt={name}
             fill
             className="object-cover"
@@ -63,7 +61,6 @@ export function DiscoveryCard({ recipe, isPicked, isViewed, onTap }: DiscoveryCa
         )}
       </div>
 
-      {/* Neo-brutalist text block at bottom */}
       <div className="absolute bottom-0 left-0 right-0 p-4">
         <div
           className="rounded-[var(--radius-default)] border-2 border-charcoal bg-bg-light p-4"

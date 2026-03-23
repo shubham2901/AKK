@@ -19,7 +19,7 @@ export type InteractionAction = (typeof ALLOWED_ACTIONS)[number]
 export function logInteraction(
   sessionId: string,
   action: InteractionAction,
-  recipeId?: string,
+  recipeId?: number,
   metadata?: Record<string, Json>,
 ) {
   if (sessionId.length < 8) return

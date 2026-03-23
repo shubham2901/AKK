@@ -60,7 +60,7 @@ export default function DietStep({ onNext }: DietStepProps) {
               }`}
             >
               <div
-                className="w-full aspect-square rounded-full border-2 border-charcoal flex items-center justify-center"
+                className="w-full aspect-square rounded-full border-2 border-charcoal flex items-center justify-center gap-1"
                 style={{ backgroundColor: option.iconBg }}
               >
                 <span
@@ -69,6 +69,14 @@ export default function DietStep({ onNext }: DietStepProps) {
                 >
                   {option.icon}
                 </span>
+                {option.secondaryIcon && (
+                  <span
+                    className="material-symbols-outlined text-2xl text-charcoal"
+                    style={{ fontVariationSettings: "'FILL' 1" }}
+                  >
+                    {option.secondaryIcon}
+                  </span>
+                )}
               </div>
               <p
                 className={`text-sm font-extrabold uppercase tracking-tighter text-center ${

@@ -6,12 +6,8 @@ import Image from 'next/image'
 import { useSessionStore } from '@/stores/session-store'
 import { logInteraction } from '@/services/interaction-logger'
 import { saveYoutubeOpen } from '@/lib/utils/youtube-tracker'
-import {
-  extractWebRecipeUrl,
-  getYouTubeAttribution,
-  getWebAttribution,
-} from '@/lib/utils/recipe-urls'
-import type { Recipe } from '@/lib/types/database.types'
+import { fetchVideosForRecipe } from '@/lib/supabase/recipes'
+import type { Recipe, RecipeVideo } from '@/lib/types/database.types'
 
 function triggerHaptic() {
   if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
@@ -40,8 +36,17 @@ export default function RecipeDetailOverlay({
   const dragControls = useDragControls()
   const [toastVisible, setToastVisible] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [videos, setVideos] = useState<RecipeVideo[]>([])
 
   const isPicked = pickedIds.includes(recipe.id)
+
+  useEffect(() => {
+    if (open) {
+      fetchVideosForRecipe(recipe.id)
+        .then(setVideos)
+        .catch((err) => console.error('[RecipeDetailOverlay] video fetch', err))
+    }
+  }, [open, recipe.id])
 
   const handleClose = useCallback(() => {
     logInteraction(sessionId, 'back_no_action', recipe.id)
@@ -64,24 +69,23 @@ export default function RecipeDetailOverlay({
     }
   }, [toastVisible])
 
-  const youtubeUrl = recipe.url
-  const webUrl =
-    recipe.web_recipe_link ?? extractWebRecipeUrl(recipe.description ?? null)
-  const webAttribution = getWebAttribution(recipe)
-  const youtubeAttribution = getYouTubeAttribution(recipe)
+  const primaryVideo = videos[0] ?? null
+  const youtubeUrl = primaryVideo?.url ?? null
+  const webUrl = primaryVideo?.web_recipe_link ?? null
+  const youtubeAttribution = primaryVideo
+    ? `YouTube / ${primaryVideo.channel_name ?? primaryVideo.title ?? 'Video'}`
+    : 'YouTube'
 
-  const name = recipe.recipe_name_english ?? recipe.title ?? 'Recipe'
-  const cookTime = recipe.cook_time_mins ?? recipe.total_time_mins
+  const name = recipe.recipe_name_english ?? 'Recipe'
+  const cookTime = recipe.cook_time_minutes
   const difficulty = recipe.difficulty
-  const cuisine =
-    recipe.cuisine_tags?.[0] ?? recipe.cuisine ?? null
-  const metaChips = [cookTime, difficulty, cuisine].filter(Boolean)
+  const cuisineLabel = recipe.cuisine?.[0] ?? null
   const cookTimeLabel = cookTime ? `${cookTime} Mins` : null
 
-  const thumbnailUrl = recipe.thumbnail
-  const isValidThumbnail =
-    thumbnailUrl &&
-    (thumbnailUrl.startsWith('http://') || thumbnailUrl.startsWith('https://'))
+  const imageUrl = recipe.image_path || recipe.hero_image
+  const isValidImage =
+    imageUrl &&
+    (imageUrl.startsWith('http://') || imageUrl.startsWith('https://'))
 
   return (
     <>
@@ -99,7 +103,6 @@ export default function RecipeDetailOverlay({
           if (info.offset.y > 100 || info.velocity.y > 500) handleClose()
         }}
       >
-        {/* Drag handle strip — activation zone only */}
         <div
           className="flex shrink-0 cursor-grab active:cursor-grabbing touch-none py-3"
           onPointerDown={(e) => dragControls.start(e)}
@@ -109,7 +112,6 @@ export default function RecipeDetailOverlay({
         </div>
 
         <div className="flex flex-col overflow-y-auto pb-32" style={{ height: 'calc(100% - 48px)' }}>
-          {/* Back nav */}
           <nav className="flex shrink-0 items-center px-6 pb-2">
             <button
               type="button"
@@ -126,12 +128,11 @@ export default function RecipeDetailOverlay({
             </button>
           </nav>
 
-          {/* Hero image */}
           <div className="px-4">
             <div className="w-full aspect-square md:aspect-video border-2 border-charcoal bg-charcoal overflow-hidden rounded-xl">
-              {isValidThumbnail ? (
+              {isValidImage ? (
                 <Image
-                  src={thumbnailUrl}
+                  src={imageUrl}
                   alt={name}
                   width={800}
                   height={600}
@@ -144,10 +145,8 @@ export default function RecipeDetailOverlay({
             </div>
           </div>
 
-          {/* Content */}
           <main className="px-6 pt-8">
             <div className="flex flex-col gap-6">
-              {/* Title */}
               <h1 className="font-heading font-black text-6xl md:text-8xl text-charcoal uppercase leading-[0.9] tracking-[-0.04em]">
                 {(() => {
                   const words = name.split(/\s+/).filter(Boolean)
@@ -162,7 +161,6 @@ export default function RecipeDetailOverlay({
                 })()}
               </h1>
 
-              {/* Meta chips */}
               <div className="flex flex-wrap gap-2">
                 {cookTimeLabel && (
                   <span className="px-4 py-1 border-2 border-primary rounded-lg text-primary font-bold text-xs uppercase tracking-tighter">
@@ -174,14 +172,13 @@ export default function RecipeDetailOverlay({
                     {difficulty}
                   </span>
                 )}
-                {cuisine && (
+                {cuisineLabel && (
                   <span className="px-4 py-1 border-2 border-primary rounded-lg text-primary font-bold text-xs uppercase tracking-tighter">
-                    {cuisine}
+                    {cuisineLabel}
                   </span>
                 )}
               </div>
 
-              {/* Hook */}
               {recipe.one_line_hook && (
                 <p className="text-xl font-medium leading-tight text-charcoal/80 max-w-xl">
                   {recipe.one_line_hook}
@@ -190,13 +187,11 @@ export default function RecipeDetailOverlay({
 
               <div className="h-[2px] bg-charcoal w-full mt-4" />
 
-              {/* Link section */}
               <div className="flex flex-col gap-4 mt-4">
                 <h3 className="font-bold uppercase tracking-widest text-sm text-charcoal/60">
                   Follow the guides
                 </h3>
 
-                {/* YouTube card */}
                 {youtubeUrl && (
                   <a
                     href={youtubeUrl}
@@ -229,7 +224,6 @@ export default function RecipeDetailOverlay({
                   </a>
                 )}
 
-                {/* Web card — only if URL exists */}
                 {webUrl && (
                   <a
                     href={webUrl}
@@ -251,7 +245,7 @@ export default function RecipeDetailOverlay({
                           Step-by-Step Article
                         </p>
                         <p className="text-xs font-bold uppercase text-charcoal/50 mt-1">
-                          {webAttribution || 'Recipe website'}
+                          {primaryVideo?.channel_name ?? 'Recipe website'}
                         </p>
                       </div>
                     </div>
@@ -260,12 +254,17 @@ export default function RecipeDetailOverlay({
                     </span>
                   </a>
                 )}
+
+                {!youtubeUrl && !webUrl && (
+                  <p className="text-sm text-charcoal/50 italic">
+                    No video or article linked yet for this recipe.
+                  </p>
+                )}
               </div>
             </div>
           </main>
         </div>
 
-        {/* Sticky CTA */}
         <div className="fixed bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-bg-light via-bg-light to-transparent pointer-events-none">
           <div className="pointer-events-auto">
             <button
@@ -283,7 +282,6 @@ export default function RecipeDetailOverlay({
         </div>
       </motion.div>
 
-      {/* Toast */}
       <AnimatePresence>
         {toastVisible && (
           <motion.div

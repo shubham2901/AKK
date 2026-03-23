@@ -12,117 +12,143 @@ export type Database = {
   }
   public: {
     Tables: {
-      recipes: {
+      recipe_videos: {
         Row: {
-          alternative_names_english: string | null
-          cook_time_mins: number | null
-          course: string | null
+          channel_name: string | null
           created_at: string | null
-          cuisine: string | null
-          cuisine_tags: string[] | null
-          description: string | null
-          diet_tags: string[] | null
-          difficulty: string | null
-          flavor_profile: string[] | null
           id: string
-          ingredient_count: number | null
-          ingredients: Json | null
-          kid_friendly: boolean | null
           likes: number | null
-          main_ingredients: string[] | null
-          meal_type: string[] | null
-          one_line_hook: string | null
-          prep_time_mins: number | null
           published_at: string | null
-          recipe_name_english: string | null
-          recipe_name_hindi: string | null
-          recipe_name_malayalam: string | null
-          recipe_name_marathi: string | null
-          recipe_name_tamil: string | null
-          recipe_name_telugu: string | null
-          servings: number | null
+          recipe_id: number
           thumbnail: string | null
           title: string | null
-          total_time_mins: number | null
           url: string | null
-          vibe_tags: string[] | null
           video_id: string
           views: number | null
           web_recipe_link: string | null
         }
         Insert: {
-          alternative_names_english?: string | null
-          cook_time_mins?: number | null
-          course?: string | null
+          channel_name?: string | null
           created_at?: string | null
-          cuisine?: string | null
-          cuisine_tags?: string[] | null
-          description?: string | null
-          diet_tags?: string[] | null
-          difficulty?: string | null
-          flavor_profile?: string[] | null
           id?: string
-          ingredient_count?: number | null
-          ingredients?: Json | null
-          kid_friendly?: boolean | null
           likes?: number | null
-          main_ingredients?: string[] | null
-          meal_type?: string[] | null
-          one_line_hook?: string | null
-          prep_time_mins?: number | null
           published_at?: string | null
-          recipe_name_english?: string | null
-          recipe_name_hindi?: string | null
-          recipe_name_malayalam?: string | null
-          recipe_name_marathi?: string | null
-          recipe_name_tamil?: string | null
-          recipe_name_telugu?: string | null
-          servings?: number | null
+          recipe_id: number
           thumbnail?: string | null
           title?: string | null
-          total_time_mins?: number | null
           url?: string | null
-          vibe_tags?: string[] | null
           video_id: string
           views?: number | null
           web_recipe_link?: string | null
         }
         Update: {
-          alternative_names_english?: string | null
-          cook_time_mins?: number | null
-          course?: string | null
+          channel_name?: string | null
           created_at?: string | null
-          cuisine?: string | null
-          cuisine_tags?: string[] | null
+          id?: string
+          likes?: number | null
+          published_at?: string | null
+          recipe_id?: number
+          thumbnail?: string | null
+          title?: string | null
+          url?: string | null
+          video_id?: string
+          views?: number | null
+          web_recipe_link?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recipe_videos_recipe_id_fkey"
+            columns: ["recipe_id"]
+            isOneToOne: false
+            referencedRelation: "recipes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recipes: {
+        Row: {
+          alternative_names_english: string | null
+          cook_time_minutes: number | null
+          created_at: string | null
+          cuisine: string[] | null
+          description: string | null
+          diet_tags: string[] | null
+          difficulty: string | null
+          hero_image: string | null
+          id: number
+          image_path: string | null
+          is_verified: boolean | null
+          meal_time: string[] | null
+          one_line_hook: string | null
+          popularity_score: number | null
+          prep_time_minutes: number | null
+          recipe_name_english: string
+          recipe_name_hindi: string | null
+          recipe_name_malayalam: string | null
+          recipe_name_marathi: string | null
+          recipe_name_tamil: string | null
+          recipe_name_telugu: string | null
+          recipe_type: string | null
+          seasonal_tags: string[] | null
+          serving_size: number | null
+          spice_level: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          alternative_names_english?: string | null
+          cook_time_minutes?: number | null
+          created_at?: string | null
+          cuisine?: string[] | null
           description?: string | null
           diet_tags?: string[] | null
           difficulty?: string | null
-          flavor_profile?: string[] | null
-          id?: string
-          ingredient_count?: number | null
-          ingredients?: Json | null
-          kid_friendly?: boolean | null
-          likes?: number | null
-          main_ingredients?: string[] | null
-          meal_type?: string[] | null
+          hero_image?: string | null
+          id: number
+          image_path?: string | null
+          is_verified?: boolean | null
+          meal_time?: string[] | null
           one_line_hook?: string | null
-          prep_time_mins?: number | null
-          published_at?: string | null
-          recipe_name_english?: string | null
+          popularity_score?: number | null
+          prep_time_minutes?: number | null
+          recipe_name_english: string
           recipe_name_hindi?: string | null
           recipe_name_malayalam?: string | null
           recipe_name_marathi?: string | null
           recipe_name_tamil?: string | null
           recipe_name_telugu?: string | null
-          servings?: number | null
-          thumbnail?: string | null
-          title?: string | null
-          total_time_mins?: number | null
-          url?: string | null
-          vibe_tags?: string[] | null
-          video_id?: string
-          views?: number | null
-          web_recipe_link?: string | null
+          recipe_type?: string | null
+          seasonal_tags?: string[] | null
+          serving_size?: number | null
+          spice_level?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          alternative_names_english?: string | null
+          cook_time_minutes?: number | null
+          created_at?: string | null
+          cuisine?: string[] | null
+          description?: string | null
+          diet_tags?: string[] | null
+          difficulty?: string | null
+          hero_image?: string | null
+          id?: number
+          image_path?: string | null
+          is_verified?: boolean | null
+          meal_time?: string[] | null
+          one_line_hook?: string | null
+          popularity_score?: number | null
+          prep_time_minutes?: number | null
+          recipe_name_english?: string
+          recipe_name_hindi?: string | null
+          recipe_name_malayalam?: string | null
+          recipe_name_marathi?: string | null
+          recipe_name_tamil?: string | null
+          recipe_name_telugu?: string | null
+          recipe_type?: string | null
+          seasonal_tags?: string[] | null
+          serving_size?: number | null
+          spice_level?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
@@ -131,7 +157,7 @@ export type Database = {
           action: string
           id: string
           metadata: Json | null
-          recipe_id: string | null
+          recipe_id: number | null
           session_id: string
           timestamp: string | null
         }
@@ -139,7 +165,7 @@ export type Database = {
           action: string
           id?: string
           metadata?: Json | null
-          recipe_id?: string | null
+          recipe_id?: number | null
           session_id: string
           timestamp?: string | null
         }
@@ -147,13 +173,13 @@ export type Database = {
           action?: string
           id?: string
           metadata?: Json | null
-          recipe_id?: string | null
+          recipe_id?: number | null
           session_id?: string
           timestamp?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "user_interactions_recipe_id_fkey"
+            foreignKeyName: "user_interactions_recipe_id_fkey1"
             columns: ["recipe_id"]
             isOneToOne: false
             referencedRelation: "recipes"
@@ -296,10 +322,11 @@ export type TablesUpdate<
 // ─── App Type Aliases ───────────────────────────────────────────────
 
 export type Recipe = Tables<'recipes'>
+export type RecipeVideo = Tables<'recipe_videos'>
 export type UserSession = Tables<'user_sessions'>
 export type UserInteraction = Tables<'user_interactions'>
 
-export type DietPreference = 'Vegetarian' | 'Non-Veg' | 'Vegan'
+export type DietPreference = 'Vegetarian' | 'Non-Veg' | 'Eggetarian'
 
 export interface Preferences {
   diet: DietPreference | null
@@ -312,6 +339,7 @@ export interface Session {
   ingredientFilter: string | null
   cuisineFilter: string[]
   mealTypeFilter: string[]
+  recipeTypeFilter: string[]
   pool: Recipe[]
   currentIndex: number
   lastActiveAt: number
