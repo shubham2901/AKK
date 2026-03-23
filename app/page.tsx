@@ -163,13 +163,15 @@ export default function Home() {
             </div>
           ) : effectiveCount >= 5 ? (
             <div className="relative flex h-[100dvh] min-h-[100dvh] max-h-[100dvh] w-full max-w-[100vw] flex-col overflow-hidden">
-              <DiscoveryCardStack
-                keyboardDisabled={filterSheetOpen || !!selectedRecipe}
-                onCardTap={(recipe) => {
-                  recordViewed(recipe.id)
-                  setSelectedRecipe(recipe)
-                }}
-              />
+              <div className="min-h-0 flex-1">
+                <DiscoveryCardStack
+                  keyboardDisabled={filterSheetOpen || !!selectedRecipe}
+                  onCardTap={(recipe) => {
+                    recordViewed(recipe.id)
+                    setSelectedRecipe(recipe)
+                  }}
+                />
+              </div>
               <FilterBar
                 pool={pool}
                 onRebuildPool={rebuildPoolFromPreferences}
