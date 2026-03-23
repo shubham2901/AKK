@@ -15,9 +15,11 @@ const SNAP_SPRING = { type: 'spring' as const, stiffness: 400, damping: 40 }
 
 export interface DiscoveryCardStackProps {
   onCardTap?: (recipe: Recipe) => void
+  /** When true, arrow keys do not change cards (e.g. filter sheet or overlay open). */
+  keyboardDisabled?: boolean
 }
 
-export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
+export function DiscoveryCardStack({ onCardTap, keyboardDisabled }: DiscoveryCardStackProps) {
   const sessionId = useSessionStore((s) => s.sessionId)
   const pickedIds = useSessionStore((s) => s.pickedIds)
   const viewedIds = useSessionStore((s) => s.viewedIds)
@@ -60,6 +62,38 @@ export function DiscoveryCardStack({ onCardTap }: DiscoveryCardStackProps) {
   }, [clampedIndex, currentIndex, filteredPool.length, setCurrentIndex])
 
   const currentRecipe = filteredPool[clampedIndex] ?? null
+
+  useEffect(() => {
+    if (keyboardDisabled) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'ArrowUp' && e.key !== 'ArrowDown') return
+      const el = e.target as HTMLElement | null
+      if (
+        el &&
+        (el.tagName === 'INPUT' ||
+          el.tagName === 'TEXTAREA' ||
+          el.tagName === 'SELECT' ||
+          el.isContentEditable)
+      ) {
+        return
+      }
+      e.preventDefault()
+      const len = filteredPool.length
+      if (len === 0) return
+      const ci = useSessionStore.getState().session.currentIndex
+      const idx = Math.min(Math.max(0, ci), len - 1)
+      const recipe = filteredPool[idx]
+      if (e.key === 'ArrowUp') {
+        logInteraction(sessionId, 'swipe_next', recipe?.id)
+        nextCard(len)
+      } else {
+        logInteraction(sessionId, 'swipe_prev', recipe?.id)
+        prevCard(len)
+      }
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [keyboardDisabled, filteredPool, nextCard, prevCard, sessionId])
 
   const x = useMotionValue(0)
   const y = useMotionValue(0)

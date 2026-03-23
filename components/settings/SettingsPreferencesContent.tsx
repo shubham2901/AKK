@@ -4,6 +4,7 @@ import { useCallback, useMemo } from 'react'
 import { motion } from 'motion/react'
 import { useSessionStore } from '@/stores/session-store'
 import { DIET_OPTIONS } from '@/lib/constants/diets'
+import type { DietPreference } from '@/lib/types/database.types'
 import { BLOCKLIST_CHIP_ROTATIONS, CUISINES } from '@/lib/constants/cuisines'
 
 export interface SettingsPreferencesContentProps {
@@ -40,7 +41,7 @@ export default function SettingsPreferencesContent({
   )
 
   const handleDiet = useCallback(
-    async (value: (typeof DIET_OPTIONS)[number]['value']) => {
+    async (value: DietPreference) => {
       setDiet(value)
       await runAfter()
     },

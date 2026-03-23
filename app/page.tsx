@@ -32,6 +32,7 @@ export default function Home() {
   useSessionLifecycle()
 
   const [screen, setScreen] = useState<'discovery' | 'settings'>('discovery')
+  const [filterSheetOpen, setFilterSheetOpen] = useState(false)
   const [synced, setSynced] = useState(false)
   const [fetchDone, setFetchDone] = useState(pool.length > 0)
   const [fetchError, setFetchError] = useState<string | null>(null)
@@ -161,22 +162,31 @@ export default function Home() {
               </button>
             </div>
           ) : effectiveCount >= 5 ? (
-            <div className="relative h-screen w-full">
+            <div className="relative flex h-[100dvh] min-h-[100dvh] max-h-[100dvh] w-full max-w-[100vw] flex-col overflow-hidden">
               <DiscoveryCardStack
+                keyboardDisabled={filterSheetOpen || !!selectedRecipe}
                 onCardTap={(recipe) => {
                   recordViewed(recipe.id)
                   setSelectedRecipe(recipe)
                 }}
               />
-              <FilterBar pool={pool} onOpenSettings={openSettings} />
+              <FilterBar
+                pool={pool}
+                onRebuildPool={rebuildPoolFromPreferences}
+                onFilterOpenChange={setFilterSheetOpen}
+              />
             </div>
           ) : (
-            <div className="relative flex min-h-screen w-full flex-col">
+            <div className="relative flex min-h-[100dvh] w-full max-w-[100vw] flex-col">
               <EmptyDiscoveryState
                 onResetFilters={handleResetFilters}
                 onShuffleAnyway={handleShuffleEmpty}
               />
-              <FilterBar pool={pool} onOpenSettings={openSettings} />
+              <FilterBar
+                pool={pool}
+                onRebuildPool={rebuildPoolFromPreferences}
+                onFilterOpenChange={setFilterSheetOpen}
+              />
             </div>
           )}
         </motion.main>
