@@ -43,3 +43,6 @@ next-env.d.ts
 # Local datasets, generated images, and design screenshots (not pushed)
 /data/
 /stitch_screens/
+
+# Local scripts (not pushed)
+/scripts/
