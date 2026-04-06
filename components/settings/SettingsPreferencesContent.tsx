@@ -5,17 +5,23 @@ import { motion } from 'motion/react'
 import { useSessionStore } from '@/stores/session-store'
 import { DIET_OPTIONS } from '@/lib/constants/diets'
 import type { DietPreference } from '@/lib/types/database.types'
-import { BLOCKLIST_CHIP_ROTATIONS, CUISINES } from '@/lib/constants/cuisines'
+import { CuisineBlocklistChips } from '@/components/settings/CuisineBlocklistChips'
+
+/** Flip to true to restore the “Hide cuisines I don’t want” block in Settings. */
+const SHOW_HIDE_CUISINES_SECTION = false
 
 export interface SettingsPreferencesContentProps {
   /** Called after diet or blocklist changes (e.g. refetch recipe pool). */
   onAfterPreferenceChange?: () => void | Promise<void>
   className?: string
+  /** When false, only the diet section is rendered (e.g. filter sheet “More”). */
+  showCuisineBlocklist?: boolean
 }
 
 export default function SettingsPreferencesContent({
   onAfterPreferenceChange,
   className = '',
+  showCuisineBlocklist = true,
 }: SettingsPreferencesContentProps) {
   const diet = useSessionStore((s) => s.preferences.diet)
   const blocklist = useSessionStore((s) => s.preferences.blocklist)
@@ -73,8 +79,8 @@ export default function SettingsPreferencesContent({
                   }
                 }}
                 whileTap={{ scale: 0.95 }}
-                className={`flex flex-1 flex-col items-center justify-between rounded-xl border-2 border-charcoal p-3 sm:p-4 cursor-pointer select-none min-w-0 ${
-                  isSelected ? 'bg-primary shadow-medium' : 'bg-white'
+                className={`flex flex-1 flex-col items-center justify-between rounded-[12px] border-2 border-charcoal p-3 sm:p-4 cursor-pointer select-none min-w-0 ${
+                  isSelected ? 'bg-primary text-white shadow-[4px_4px_0px_0px_#1C1C1E]' : 'bg-white'
                 }`}
               >
                 <div
@@ -82,14 +88,14 @@ export default function SettingsPreferencesContent({
                   style={{ backgroundColor: option.iconBg }}
                 >
                   <span
-                    className="material-symbols-outlined text-3xl sm:text-4xl text-charcoal"
+                    className={`material-symbols-outlined text-3xl sm:text-4xl ${isSelected ? 'text-white' : 'text-charcoal'}`}
                     style={{ fontVariationSettings: "'FILL' 1" }}
                   >
                     {option.icon}
                   </span>
                   {option.secondaryIcon && (
                     <span
-                      className="material-symbols-outlined text-xl sm:text-2xl text-charcoal"
+                      className={`material-symbols-outlined text-xl sm:text-2xl ${isSelected ? 'text-white' : 'text-charcoal'}`}
                       style={{ fontVariationSettings: "'FILL' 1" }}
                     >
                       {option.secondaryIcon}
@@ -109,34 +115,21 @@ export default function SettingsPreferencesContent({
         </div>
       </section>
 
-      <section className="mt-8 sm:mt-10">
-        <h2 className="font-heading text-lg font-black uppercase tracking-tight text-charcoal sm:text-xl">
-          Cuisine blocklist
-        </h2>
-        <p className="mt-2 font-sans text-sm font-medium text-charcoal/70">
-          We&apos;ll hide these cuisines from your pool.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2 sm:gap-3 sm:mt-6">
-          {CUISINES.map((cuisine, index) => {
-            const isSelected = blockedSet.has(cuisine)
-            const rotationClass =
-              BLOCKLIST_CHIP_ROTATIONS[index % BLOCKLIST_CHIP_ROTATIONS.length]
-            return (
-              <motion.button
-                key={cuisine}
-                type="button"
-                onClick={() => void toggleCuisine(cuisine)}
-                whileTap={{ scale: 0.95 }}
-                className={`inline-flex min-h-[44px] items-center rounded-lg border-2 border-charcoal px-4 py-2 text-sm sm:text-base font-bold ${rotationClass} ${
-                  isSelected ? 'bg-primary text-white shadow-small' : 'bg-white text-charcoal'
-                }`}
-              >
-                {cuisine}
-              </motion.button>
-            )
-          })}
-        </div>
-      </section>
+      {SHOW_HIDE_CUISINES_SECTION && showCuisineBlocklist && (
+        <section className="mt-8 sm:mt-10">
+          <h2 className="font-heading text-lg font-black uppercase tracking-tight text-charcoal sm:text-xl">
+            Hide cuisines I don&apos;t want
+          </h2>
+          <p className="mt-2 font-sans text-sm font-medium text-charcoal/70">
+            We&apos;ll hide these cuisines from your pool.
+          </p>
+          <CuisineBlocklistChips
+            variant="settings"
+            selectedSet={blockedSet}
+            onToggle={(cuisine) => void toggleCuisine(cuisine)}
+          />
+        </section>
+      )}
     </div>
   )
 }

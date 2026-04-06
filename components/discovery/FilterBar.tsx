@@ -1,10 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useSessionStore } from '@/stores/session-store'
 import { logInteraction } from '@/services/interaction-logger'
 import FilterBottomSheet from './FilterBottomSheet'
 import type { Recipe } from '@/lib/types/database.types'
+import {
+  MOMENT_LABELS,
+  RECIPE_CATEGORY_LABELS,
+  type RecipeCategoryId,
+  getMomentFromMealFilter,
+} from '@/lib/constants/recipe-filter-mappings'
 
 interface FilterBarProps {
   pool: Recipe[]
@@ -20,8 +26,23 @@ export default function FilterBar({ pool, onRebuildPool, onFilterOpenChange }: F
   const mealTypeFilter = useSessionStore((s) => s.session.mealTypeFilter)
   const recipeTypeFilter = useSessionStore((s) => s.session.recipeTypeFilter)
 
-  const hasActiveFilters = cuisineFilter.length > 0 || mealTypeFilter.length > 0 || recipeTypeFilter.length > 0
-  const activeChips = [...recipeTypeFilter, ...cuisineFilter, ...mealTypeFilter]
+  const activeChips = useMemo(() => {
+    const chips: string[] = []
+    const moment = getMomentFromMealFilter(mealTypeFilter)
+    if (moment) chips.push(MOMENT_LABELS[moment])
+    else if (mealTypeFilter.length > 0) chips.push(...mealTypeFilter)
+    for (const id of recipeTypeFilter) {
+      if (id in RECIPE_CATEGORY_LABELS) {
+        chips.push(RECIPE_CATEGORY_LABELS[id as RecipeCategoryId])
+      } else {
+        chips.push(id)
+      }
+    }
+    chips.push(...cuisineFilter)
+    return chips
+  }, [mealTypeFilter, recipeTypeFilter, cuisineFilter])
+
+  const hasActiveFilters = activeChips.length > 0
 
   const openFilters = () => {
     setFilterOpen(true)

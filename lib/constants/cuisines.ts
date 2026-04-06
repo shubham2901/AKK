@@ -1,3 +1,15 @@
+/** Shown first in hide-cuisines UI; rest behind “Show more”. */
+export const DEFAULT_VISIBLE_CUISINES = [
+  'North Indian',
+  'South Indian',
+  'Bengali',
+  'Gujarati',
+  'Maharashtrian',
+  'Chinese',
+  'Street Food',
+  'Continental',
+] as const
+
 export const CUISINES = [
   'North Indian',
   'South Indian',

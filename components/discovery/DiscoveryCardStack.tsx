@@ -4,6 +4,8 @@ import { useMemo, useEffect, useState } from 'react'
 import { motion, AnimatePresence, useMotionValue, animate } from 'motion/react'
 import { useSessionStore, filterPool } from '@/stores/session-store'
 import { logInteraction } from '@/services/interaction-logger'
+import { triggerEagerRecipeImageGeneration } from '@/lib/recipe-image-pipeline'
+import { getRecipeImageUrl } from '@/lib/utils/recipe-image-url'
 import { DiscoveryCard } from './DiscoveryCard'
 import type { Recipe } from '@/lib/types/database.types'
 
@@ -62,6 +64,30 @@ export function DiscoveryCardStack({ onCardTap, keyboardDisabled }: DiscoveryCar
   }, [clampedIndex, currentIndex, filteredPool.length, setCurrentIndex])
 
   const currentRecipe = filteredPool[clampedIndex] ?? null
+
+  useEffect(() => {
+    if (filteredPool.length === 0) return
+    const start = clampedIndex + 1
+    const end = Math.min(start + 10, filteredPool.length)
+    for (let i = start; i < end; i++) {
+      const url = getRecipeImageUrl(filteredPool[i])
+      if (url) {
+        const img = new Image()
+        img.src = url
+      }
+    }
+  }, [clampedIndex, filteredPool])
+
+  useEffect(() => {
+    if (filteredPool.length === 0) return
+    const start = clampedIndex + 1
+    const end = Math.min(start + 6, filteredPool.length)
+    const ids: number[] = []
+    for (let i = start; i < end; i++) {
+      ids.push(filteredPool[i].id)
+    }
+    triggerEagerRecipeImageGeneration(ids)
+  }, [clampedIndex, filteredPool])
 
   useEffect(() => {
     if (keyboardDisabled) return
@@ -183,6 +209,7 @@ export function DiscoveryCardStack({ onCardTap, keyboardDisabled }: DiscoveryCar
           >
             <DiscoveryCard
               recipe={currentRecipe}
+              priority
               isPicked={pickedIds.includes(currentRecipe.id)}
               isViewed={viewedIds.includes(currentRecipe.id)}
               onTap={() => {

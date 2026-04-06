@@ -1,9 +1,8 @@
 'use client'
 
 import { useState, useCallback } from 'react'
-import { motion } from 'motion/react'
 import { useSessionStore } from '@/stores/session-store'
-import { BLOCKLIST_CHIP_ROTATIONS, CUISINES } from '@/lib/constants/cuisines'
+import { CuisineBlocklistChips } from '@/components/settings/CuisineBlocklistChips'
 
 interface BlocklistStepProps {
   onComplete: () => void
@@ -67,26 +66,12 @@ export default function BlocklistStep({ onComplete, onBack }: BlocklistStepProps
         </p>
       </div>
 
-      {/* Asymmetric tag cloud */}
-      <div className="flex flex-wrap gap-3 items-start content-start flex-1 mt-8 mb-24">
-        {CUISINES.map((cuisine, index) => {
-          const isSelected = selected.has(cuisine)
-          const rotationClass =
-            BLOCKLIST_CHIP_ROTATIONS[index % BLOCKLIST_CHIP_ROTATIONS.length]
-          return (
-            <motion.button
-              key={cuisine}
-              type="button"
-              onClick={() => toggleCuisine(cuisine)}
-              whileTap={{ scale: 0.95 }}
-              className={`inline-block px-5 py-2.5 border-2 border-charcoal rounded-lg font-bold text-base min-h-[44px] flex items-center ${rotationClass} ${
-                isSelected ? 'bg-primary text-white shadow-small' : 'bg-white text-charcoal'
-              }`}
-            >
-              {cuisine}
-            </motion.button>
-          )
-        })}
+      <div className="flex-1 mt-8 mb-24">
+        <CuisineBlocklistChips
+          variant="onboarding"
+          selectedSet={selected}
+          onToggle={toggleCuisine}
+        />
       </div>
 
       {/* Bottom area */}

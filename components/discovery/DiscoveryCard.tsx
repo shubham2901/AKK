@@ -1,16 +1,28 @@
 'use client'
 
 import Image from 'next/image'
+import { useState } from 'react'
 import type { Recipe } from '@/lib/types/database.types'
+import { getRecipeImageUrl } from '@/lib/utils/recipe-image-url'
 
 export interface DiscoveryCardProps {
   recipe: Recipe
   isPicked?: boolean
   isViewed?: boolean
   onTap?: () => void
+  /** LCP image: current card in stack. */
+  priority?: boolean
 }
 
-export function DiscoveryCard({ recipe, isPicked, isViewed, onTap }: DiscoveryCardProps) {
+const INFO_OVERLAP_PX = 52
+
+export function DiscoveryCard({
+  recipe,
+  isPicked,
+  isViewed,
+  onTap,
+  priority = false,
+}: DiscoveryCardProps) {
   const name = recipe.recipe_name_english ?? 'Recipe'
   const hook = recipe.one_line_hook ?? ''
   const chips = [
@@ -18,14 +30,12 @@ export function DiscoveryCard({ recipe, isPicked, isViewed, onTap }: DiscoveryCa
     ...(recipe.diet_tags ?? []).slice(0, 1),
   ].slice(0, 3)
 
-  const imageUrl = recipe.image_path || recipe.hero_image
-  const isValidUrl =
-    imageUrl &&
-    (imageUrl.startsWith('http://') || imageUrl.startsWith('https://'))
+  const imageUrl = getRecipeImageUrl(recipe)
+  const [imageLoaded, setImageLoaded] = useState(false)
 
   return (
     <div
-      className={`relative h-full w-full overflow-hidden rounded-[var(--radius-default)] touch-none ${isViewed ? 'opacity-90' : ''}`}
+      className={`relative h-full w-full overflow-hidden rounded-[var(--radius-default)] touch-none bg-bg-light ${isViewed ? 'opacity-90' : ''}`}
       style={{ touchAction: 'none' }}
       onClick={onTap}
       role="button"
@@ -43,29 +53,44 @@ export function DiscoveryCard({ recipe, isPicked, isViewed, onTap }: DiscoveryCa
         </div>
       )}
       <div className="absolute inset-0">
-        {isValidUrl ? (
-          <Image
-            src={imageUrl}
-            alt={name}
-            fill
-            className="object-cover"
-            sizes="100vw"
-            draggable={false}
-            unoptimized
-          />
+        {imageUrl ? (
+          <>
+            {!imageLoaded && (
+              <div
+                className="discovery-card-shimmer absolute inset-0 z-0"
+                aria-hidden
+              />
+            )}
+            <Image
+              src={imageUrl}
+              alt={name}
+              fill
+              className={`object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              sizes="100vw"
+              draggable={false}
+              unoptimized
+              priority={priority}
+              onLoad={() => setImageLoaded(true)}
+            />
+          </>
         ) : (
           <div
-            className="h-full w-full bg-charcoal/20"
-            style={{ backgroundColor: 'var(--color-charcoal)' }}
+            className="discovery-card-shimmer h-full w-full"
+            aria-hidden
           />
         )}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-44 bg-gradient-to-t from-bg-light via-bg-light/75 to-transparent"
+          aria-hidden
+        />
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4">
+      <div className="absolute bottom-0 left-0 right-0 z-[2] px-4 pb-4">
         <div
           className="rounded-[var(--radius-default)] border-2 border-charcoal bg-bg-light p-4"
           style={{
             boxShadow: 'var(--shadow-small)',
+            marginTop: -INFO_OVERLAP_PX,
           }}
         >
           <h2 className="font-heading text-2xl font-extrabold leading-tight text-charcoal md:text-3xl">

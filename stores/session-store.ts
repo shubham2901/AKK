@@ -3,6 +3,7 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import type { Recipe, DietPreference, Preferences, Session } from '@/lib/types/database.types'
+import { recipeMatchesCategoryFilter } from '@/lib/constants/recipe-filter-mappings'
 
 // ─── Safe localStorage adapter (Safari private browsing throws QuotaExceededError) ───
 
@@ -72,7 +73,7 @@ const initialSession: Session = {
   ingredientFilter: null,
   cuisineFilter: [],
   mealTypeFilter: [],
-  recipeTypeFilter: ['Main Course'],
+  recipeTypeFilter: [],
   pool: [],
   currentIndex: 0,
   lastActiveAt: Date.now(),
@@ -94,9 +95,7 @@ export function filterPool(
     const matchMeal =
       mealTypeFilter.length === 0 ||
       r.meal_time?.some((m) => mealTypeFilter.includes(m)) === true
-    const matchType =
-      recipeTypeFilter.length === 0 ||
-      (r.recipe_type != null && recipeTypeFilter.some((t) => r.recipe_type!.includes(t)))
+    const matchType = recipeMatchesCategoryFilter(r.recipe_type, recipeTypeFilter)
     return matchCuisine && matchMeal && matchType
   })
 }
@@ -187,7 +186,7 @@ export const useSessionStore = create<
             ingredientFilter,
             cuisineFilter: [],
             mealTypeFilter: [],
-            recipeTypeFilter: ['Main Course'],
+            recipeTypeFilter: [],
             pool: s.session.pool,
             currentIndex: 0,
             lastActiveAt: Date.now(),
@@ -242,7 +241,7 @@ export const useSessionStore = create<
             ...s.session,
             cuisineFilter: [],
             mealTypeFilter: [],
-            recipeTypeFilter: ['Main Course'],
+            recipeTypeFilter: [],
             ingredientFilter: null,
             currentIndex: 0,
             lastActiveAt: Date.now(),
